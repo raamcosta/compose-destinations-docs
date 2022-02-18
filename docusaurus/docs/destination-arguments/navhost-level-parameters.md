@@ -9,11 +9,11 @@ Compose Destinations supports some of these out of the box:
 
 - `NavController` (or `NavHostController`) - If part of the Composable function parameters, Compose Destinations will pass in the `NavController` used in the `DestinationsNavHost`.
 
-- `DestinationsNavigator` - This is an interface wrapper around `NavController` useful for inverting the dependency in the `NavController`. This enables your Composable to be testable and previewable since you can just pass an empty implementation (one is available out of the box `EmptyDestinationsNavigator`). Read more in the [navigation section](navigation/basics)
+- `DestinationsNavigator` - This is an interface wrapper around `NavController` useful for inverting the dependency in the `NavController`. This enables your Composable to be testable and previewable since you can just pass an empty implementation (one is available out of the box `EmptyDestinationsNavigator`). Read more in the [navigation section](../navigation/basics)
 
 - `NavBackStackEntry` - the back stack entry correspondent to the destination composable. You should avoid depending on this directly.
 
-- `ResultBackNavigator` / `ResultRecipient` - needed for sending results back from a destination to the previous one. Read more [here](navigation/backresult)
+- `ResultBackNavigator` / `ResultRecipient` - needed for sending results back from a destination to the previous one. Read more [here](../navigation/backresult)
 
 Even though most screen Composables will only need their navigation arguments and some of the components mentioned above, if you have a scenario where you need to pass something else, you can manually call screen Composables.
 
