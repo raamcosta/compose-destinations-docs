@@ -14,7 +14,7 @@ const config = {
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'raamcosta', // Usually your GitHub org/user name.
-  projectName: 'compose-destinations', // Usually your repo name.
+  projectName: 'compose-destinations-docs', // Usually your repo name.
 
   presets: [
     [
@@ -24,7 +24,7 @@ const config = {
         docs: {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/raamcosta/compose-destinations-docs/tree/main/',
+          editUrl: 'https://github.com/raamcosta/compose-destinations-docs/edit/main/docusaurus/',
         },
         blog: false,
         theme: {
