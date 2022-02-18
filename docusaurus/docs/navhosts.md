@@ -20,24 +20,24 @@ DestinationsNavHost(navGraph = NavGraphs.root)
 
 :::info
 
-`NavGraphs` is a generated object that contains the definition of all your navigation graphs and their destinations. By default, all annotated composable will belong to the "root" navigation graph. But you can customize this however you want. Read more [here](https://github.com/raamcosta/compose-destinations/wiki/Defining-your-navigation-graphs)
+`NavGraphs` is a generated object that contains the definition of all your navigation graphs and their destinations. By default, all annotated composable will belong to the "root" navigation graph. But you can customize this however you want. Read more [here](defining-navgraphs)
 
 :::
 
 However, you can override some defaults:
 
-- `navGraph: NavGraphSpec` - In case you have multiple top-level navigation graphs or [you have disabled the generation of `NavGraphs`](https://github.com/raamcosta/compose-destinations/wiki/Defining-your-navigation-graphs#manually-defining-navigation-graphs) you can pass a specific one here. If not, it will always be `NavGraphs.root`.
+- `navGraph: NavGraphSpec` - In case you have multiple top-level navigation graphs or [you have disabled the generation of `NavGraphs`](defining-navgraphs#manually-defining-navigation-graphs) you can pass a specific one here. If not, it will always be `NavGraphs.root`.
 
 - `modifier: Modifier` - modifier applied to this Composable. It affects the screen Composable.
 
 - `startRoute: Route`: used to override the start route set in the `NavGraph` "startRoute" parameter at runtime. If you have some condition upon which you want to start on some other screen, then pass it explicitly with this parameter. `Route` is an interface only implemented by `Destination` and `NavGraph`, since both are valid to start at (if you pass a `NavGraph` then that `NavGraph`'s start destination will be the first shown).
 
-- `engine: NavHostEngine` - this is the engine that will do all the composable registering in the NavHost. The only reason to override the default here is when you're using `animations-core`, i.e, when you want to animate between screens or have Bottom Sheet destinations. If that is your case, then call `rememberAnimatedNavHostEngine` and pass the result here. Read more [here](https://github.com/raamcosta/compose-destinations/wiki/Styles-and-Animations)
+- `engine: NavHostEngine` - this is the engine that will do all the composable registering in the NavHost. The only reason to override the default here is when you're using `animations-core`, i.e, when you want to animate between screens or have Bottom Sheet destinations. If that is your case, then call `rememberAnimatedNavHostEngine` and pass the result here. Read more [here](styles-and-animations)
 
 - `navController: NavHostController`: If you need to get a hold of the `NavController`, you can use `rememberAnimatedNavController` if you're using `animations-core` and the normal `rememberNavController` if you are not.
 
 - `manualComposableCallsBuilder: ManualComposableCallsBuilder.() -> Unit`: offers a `ManualComposableCallsBuilder` scope where you can
-make manual calls to specific Destination Composables which belong to the `navGraph` passed in here. This can be useful if you need to pass non-navigation arguments to those specific Composables which the library cannot provide. Read more [here](https://github.com/raamcosta/compose-destinations/wiki/Destination-arguments#non-navigation-parameters)
+make manual calls to specific Destination Composables which belong to the `navGraph` passed in here. This can be useful if you need to pass non-navigation arguments to those specific Composables which the library cannot provide. Read more [here](destination-arguments/navhost-level-parameters)
 
 ## Vanilla NavHosts
 
@@ -70,4 +70,4 @@ NavHost( // Replace with AnimatedNavHost if you're using `animations-core`
 }
 ```
 
-If you do this, you should disable the `NavGraph`s generation. Check [here](https://github.com/raamcosta/compose-destinations/wiki/Defining-your-navigation-graphs#manually-defining-navigation-graphs) out to do that.
+If you do this, you should disable the `NavGraph`s generation. Check [here](defining-navgraphs#manually-defining-navigation-graphs) out to do that.

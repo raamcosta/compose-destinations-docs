@@ -19,7 +19,7 @@ fun WelcomeScreen() {
 }
 ```
 
-As is, this will create an entry in the navigation graph with no navigation arguments (check how you declare those [here](https://github.com/raamcosta/compose-destinations/wiki/Destination-arguments#navigation-arguments)), with route "welcome_screen".
+As is, this will create an entry in the navigation graph with no navigation arguments (check how you declare those [here](destination-arguments/navigation-arguments)), with route "welcome_screen".
 
 There are a lot of ways to configure this destination.
 Lets start with an example where all those are used:
@@ -50,10 +50,10 @@ data class ProfileScreenNavArgs(
 * `route` - This is a way to override the default route for this destination (which would be "profile_screen" in this case)
 * `start` - If true (default is false), marks this destination as the start of its navigation graph. In this case, since this would belong to the "profile" navigation graph (as defined in the `navGraph`) when navigating to that nested navigation graph, this screen would be shown.
 Each navigation graph needs one and only one start destination. A compile-time check is in place to ensure this.
-* `navGraph` - By default it will be "root". All destinations that do not specify other with this argument, will belong to the "root" navigation graph. In the case of the example, the destination would belong to the "profile" navigation graph which will be nested in the "root" one. All other destinations with the same `navGraph` argument would also belong to it. You can read more about nested navigation graphs [here](https://github.com/raamcosta/compose-destinations/wiki/Defining-your-navigation-graphs).
-* `navArgsDelegate` - a way to delegate the navigation arguments to some other data class. Read more [here](https://github.com/raamcosta/compose-destinations/wiki/Destination-arguments#navigation-arguments-class-delegate)
-* `deepLinks` - define deep links to this destination. Read more [here](https://github.com/raamcosta/compose-destinations/wiki/Deep-Links)
-* `style` - class that defines the style the destination is shown in or is animated when entering or leaving the screen. Read more [here](https://github.com/raamcosta/compose-destinations/wiki/Styles-and-Animations)
+* `navGraph` - By default it will be "root". All destinations that do not specify other with this argument, will belong to the "root" navigation graph. In the case of the example, the destination would belong to the "profile" navigation graph which will be nested in the "root" one. All other destinations with the same `navGraph` argument would also belong to it. You can read more about nested navigation graphs [here](defining-navgraphs).
+* `navArgsDelegate` - a way to delegate the navigation arguments to some other data class. Read more [here](destination-arguments/navigation-arguments#navigation-arguments-class-delegate)
+* `deepLinks` - define deep links to this destination. Read more [here](deeplinks)
+* `style` - class that defines the style the destination is shown in or is animated when entering or leaving the screen. Read more [here](styles-and-animations)
 
 ## Generated Destination object
 
@@ -108,7 +108,7 @@ object ProfileScreenDestination : TypedDestination<ProfileScreenNavArgs> {
 }
 ```
 
-You can invoke these `Destinations` to create a valid `Direction` object you can then pass to the navigators. Read more about navigation [here](https://github.com/raamcosta/compose-destinations/wiki/Navigation).
+You can invoke these `Destinations` to create a valid `Direction` object you can then pass to the navigators. Read more about navigation [here](navigation/basics).
 Another reason to interact with `Destinations` is when using the `argsFrom` methods which can be used to get the navigation arguments in the form of a `data class` from either a `NavBackStackEntry` or a `SavedStateHandle`.
 
 If not using `navArgsDelegate` in the annotation, a generated class with name `NavArgs` will be nested in the `Destination`. Either way, the `argsFrom` method will return that data class containing your navigation arguments.

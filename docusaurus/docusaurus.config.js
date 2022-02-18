@@ -56,7 +56,7 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} Compose Destinations, Rafael Costa. Built with Docusaurus.`,
       },
       prism: {
-        additionalLanguages: ['kotlin'],
+        additionalLanguages: ['kotlin', 'groovy'],
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },

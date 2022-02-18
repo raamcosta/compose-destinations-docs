@@ -26,12 +26,12 @@ ksp {
 
 This config is only meant for the default (`"singlemodule"`) mode. See more about modes on next section.
 It will make `start` and `navGraph` parameters of the `@Destination` annotation ignored in the code generating process since these are hints only used in the generating of the `NavGraphs` object. KSP task will log some warnings about this.
-If you do this, you will have more control over the navigation graphs of your app. Read more about when you might want to do this [here](https://github.com/raamcosta/compose-destinations/wiki/Defining-your-navigation-graphs#manually-defining-navigation-graphs).
+If you do this, you will have more control over the navigation graphs of your app. Read more about when you might want to do this [here](defining-navgraphs#manually-defining-navigation-graphs).
 
 
 ## Multi module configs
 
-```gradle
+```kotlin
 ksp {
    arg("compose-destinations.mode", "[GENERATION_MODE_FOR_MODULE]")
    arg("compose-destinations.moduleName", "[YOUR_MODULE_NAME")

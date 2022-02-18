@@ -75,7 +75,7 @@ If you disable this task, Compose Destinations will print some warnings if you a
 
 ## "Vanilla NavHosts"
 
-Finally, you can opt to not use `DestinationsNavHost`. This approach is described in more details [here](https://github.com/raamcosta/compose-destinations/wiki/NavHosts#vanilla-navhosts).
+Finally, you can opt to not use `DestinationsNavHost`. This approach is described in more details [here](navhosts#vanilla-navhosts).
 By doing that, you will be defining the Navigation graphs of the `NavHost` while dealing with arguments, and calling the Composables.
 
 In the end, the fact that we included this approach in both sections speaks to why we believe it's not the best approach: you are dealing with multiple concerns and you lose a way to quickly check (both at runtime and by looking at the code) how the Navigation graphs of your app are defined.

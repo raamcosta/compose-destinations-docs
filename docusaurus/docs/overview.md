@@ -27,8 +27,6 @@ No need to learn a whole new framework to navigate - most APIs are either the sa
   - Easy deep linking to screens
   - All you can do with Official Jetpack Compose Navigation but in a simpler safer way!
 
-For a deeper look into all the features, check our [wiki](https://github.com/raamcosta/compose-destinations/wiki).
-
 ## Basic Usage
 
 ### 1. Annotate your screen Composables with `@Destination`
@@ -55,7 +53,7 @@ fun ProfileScreen(
 :::info
 
 There is an alternative way to define the destination arguments in case you don't need to use them
-inside the Composable (as is likely the case when using ViewModel). Read more [here](https://github.com/raamcosta/compose-destinations/wiki/Destination-arguments#navigation-arguments-class-delegate).
+inside the Composable (as is likely the case when using ViewModel). Read more [here](destination-arguments/navigation-arguments#navigation-arguments-class-delegate).
 
 :::
 
@@ -77,7 +75,7 @@ fun SomeOtherScreen(
 ```
 :::note
 
-DestinationsNavigator is a wrapper interface to NavController that if declared as a parameter, will be provided for free by the library. NavController can also be provided in the exact same way, but it ties your composables to a specific implementation which will make it harder to test and preview. Read more [here](https://github.com/raamcosta/compose-destinations/wiki/Navigation)
+DestinationsNavigator is a wrapper interface to NavController that if declared as a parameter, will be provided for free by the library. NavController can also be provided in the exact same way, but it ties your composables to a specific implementation which will make it harder to test and preview. Read more [here](navigation/basics)
 
 :::
 

@@ -17,8 +17,11 @@ fun ProfileScreen(
 Only arguments of type `String`, `Boolean`, `Int`, `Float`, `Long`, `Parcelable`, `Serializable` and `Enums` will be considered navigation arguments. <br/>
 If some of the arguments are not mandatory, i.e they may not be sent when navigating to this screen, you can mark them as nullable or define default values for them.
 
-> Note that only `String` navigation arguments can be nullable when using Compose Navigation (which we also use internally, so we inherit this limitation)
-> `Parcelable`, `Serializable` and `Enums` can also be nullable since they use String type internally.
+:::note
+
+Only `String`, `Parcelable`, `Serializable` and `Enums` navigation arguments can be nullable when using Compose Navigation.
+
+:::
 
 ```kotlin
 @Destination
