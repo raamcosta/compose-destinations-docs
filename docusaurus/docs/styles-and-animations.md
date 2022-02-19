@@ -160,17 +160,21 @@ fun AnimatedVisibilityScope.ProfileScreen() { /*...*/ }
 
 Notice the `AnimatedVisibilityScope` receiver. This scope is available to all "non dialog" and "non bottom sheet" Composables in the nav graph once you're using the `animations-core` dependency instead of the normal `core`.
 
-### Animations setup
+### Animations / Bottom Sheet setup
 
 If you want to use animations between screens or bottom sheet styled screens, you need to:
-1. Replace the normal `core` dependency with the `animations-core` (`io.github.raamcosta.compose-destinations:animations-core`) in your module's build.gradle file.
 
-2. Call `rememberAnimatedNavHostEngine` to get an instance of `NavHostEngine` capable of dealing with animations and bottom sheet destinations. 
-> If you need the `NavController`, call `rememberAnimatedNavController` instead of the `rememberNavController`.
+**1.** Replace the normal `core` dependency with the `animations-core` (`io.github.raamcosta.compose-destinations:animations-core`) in your module's build.gradle file.
 
-3. Pass the `NavHostEngine` in the `DestinationsNavHost` call.
-> If you called `rememberAnimatedNavController` then also pass that.
+**2.** Call `rememberAnimatedNavHostEngine` to get an instance of `NavHostEngine` capable of dealing with animations and bottom sheet destinations. 
 
+:::caution
+If you need the `NavController`, use `rememberAnimatedNavController` instead of `rememberNavController`.
+:::
+
+**3.** Pass the `NavHostEngine` in the `DestinationsNavHost` call.
+
+> If you called `rememberAnimatedNavController` then also pass that `NavController`.
 
 `rememberAnimatedNavHostEngine` has a parameter to define the default animations. This will make it so that all destinations with no specified style, will actually enter and exit as defined in that parameter.
 Besides, you can also override this default for specific nested navigation graphs. If you want to do that use the `defaultAnimationsForNestedNavGraph: Map<NavGraph, NestedNavGraphDefaultAnimations>` by mapping with navigation graphs to specific default animation parameters.
