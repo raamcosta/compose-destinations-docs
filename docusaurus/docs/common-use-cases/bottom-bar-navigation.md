@@ -63,12 +63,19 @@ It internally uses `NavBackStackEntry.destinationSpec(navGraph: NavGraphSpec)` f
 **Finally, use the Composable on your Scaffold's `bottomBar` slot**
 
 ```kotlin
+val navController = rememberNavController()
+
 Scaffold(
     bottomBar = { 
         BottomBar(navController)
     }
     //...
-)
+) {
+    DestinationsNavHost(
+        navController = navController //!! this is important
+        // ...
+    )
+}
 ```
 
 Some considerations:
