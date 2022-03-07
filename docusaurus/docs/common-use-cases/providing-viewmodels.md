@@ -124,7 +124,7 @@ fun AppNavigation(
                 val parentEntry = remember { 
                     navController.getBackStackEntry(NavGraphs.settings.route) 
                 }
-                dependency(hiltViewModel<SettingsViewModel>(NavGraphs.settings))
+                dependency(hiltViewModel<SettingsViewModel>(parentEntry))
             }
 
             // To tie ActivityViewModel to the activity, making it available to all destinations
@@ -229,4 +229,4 @@ There are plenty of ways to do this depending on where you're saving the depende
 
 If you're using a DI framework other than Hilt (Koin, f.e) then you need to check that framework's documentation in how you can get an instance of a ViewModel.
 
-Remember that if in your framework you have to explicitly pass something like `NavBackStackEntry`, `ViewModelStoreOwner` or `SavedStateRegistryOwner` then check the above example to see how to get that. You can use them to make your own wrapper calls the framework method.
+Remember that if in your framework you have to explicitly pass something like `NavBackStackEntry`, `ViewModelStoreOwner` or `SavedStateRegistryOwner` then check the above example to see how to get that. You can use them to make your own wrapper calling the framework method.

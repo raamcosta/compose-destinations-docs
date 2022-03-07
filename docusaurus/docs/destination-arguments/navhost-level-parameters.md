@@ -75,7 +75,7 @@ DestinationsNavHost(
 )
 ```
 
-This lambda will be called everytime a new screen is navigated to to let you prepare components safely scoped to that screen only, since this "container" will not leave behond the screen that is navigated to. 
+This lambda will be called everytime a new screen is navigated to to let you prepare components safely scoped to that screen only, since this "container" will not live behond the screen that is navigated to. 
 
 :::info
 This lambda is scoped in a `DependenciesContainerBuilder` which is also a `DestinationScope`. So, everything we have available when manually calling a Composable screen, you also have here, including a `destination` with the `DestinationSpec` that is being navigated to. This enables you to make decisions here and have dependencies only available to specific destinations or specific navigation graphs. ([Check this for an example](../common-use-cases/providing-viewmodels#share-viewmodels-between-multiple-destinations))
