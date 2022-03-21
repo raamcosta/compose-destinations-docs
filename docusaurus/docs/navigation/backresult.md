@@ -40,10 +40,19 @@ fun GreetingScreen(
     navigator: DestinationsNavigator,
     resultRecipient: ResultRecipient<GoToProfileConfirmationDestination, Boolean>
 ) {
-    resultRecipient.onResult { confirmed ->
-        // Do whatever with the result received!
-        // Think of it like a button click, usually you want to call
-        // a view model method here or navigate somewhere
+    resultRecipient.onNavResult { result ->
+        when (result) {
+            is NavResult.Canceled -> {
+                // `GoToProfileConfirmationDestination` was shown but it was canceled
+                // and no value was set (example: dialog/bottom sheet dismissed)
+            }
+            is NavResult.Value -> {
+                println("result reseived from GoToProfileConfirmationDestination = ${result.value}")
+                // Do whatever with the result received!
+                // Think of it like a button click, usually you want to call
+                // a view model method here or navigate somewhere
+            }
+        }
     }
 
     // Navigate normally to the other screen, example:
@@ -56,8 +65,9 @@ fun GreetingScreen(
 }
 ```
 
-Notice the type arguments of `ResultRecipient`. The first is the `Destination` that is going to send results to the recipient and the second is the type of result the recipient is expected.  
-The `onResult` listener will be called every time the `GoToProfileConfirmation` (in this case) calls `navigateBack` on its `ResultBackNavigator` and receives the result sent through that call.
+Notice the type arguments of `ResultRecipient`. The first is the `Destination` that is going to send results to the recipient and the second is the type of result the recipient is expecting.  
+The `onNavResult` listener will be called every time the `GoToProfileConfirmation` (in this case) calls `navigateBack` on its `ResultBackNavigator` and receives the result sent through that call.
+If `GoToProfileConfirmation` screen is shown and then gets popped out of the back stack and no result is set (examples: it calls `navigateBack` with no result set; it is a dialog and it gets dismissed; etc), then the `onNavResult` gets called with `NavResult.Canceled` so that you can react to this.
 
 **Limitations enforced at compile time:**
 

@@ -154,7 +154,7 @@ The example uses `hiltViewModel`, but check the next sections if you don't use H
 
 ## Make your one liner ViewModel getter
 
-:::caution
+:::info
 This section is not directly related to Compose Destinations. This would be true and valid even if you were not using Compose Destinations library.  
 I just felt like this could be helpful as I have seen some confusion around getting a ViewModel tied to the navigation destination.
 :::
