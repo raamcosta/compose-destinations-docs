@@ -47,28 +47,28 @@ Besides `uriPattern`, `DeepLink` class has other ways of defining it like `actio
 ## Screens with mandatory Parcelable/Serializable navigation arguments
 
 If you have a screen that declares a mandatory navigation argument of `Parcelable`/`Serializable` type, you need to be explicit about how that type is represented in the deep link route you are expecting.
-For this, you need to use `@NavTypeSerializer` annotation in a class that implements either `ParcelableNavTypeSerializer<YOUR_NAV_ARG_TYPE> ` or `SerializableNavTypeSerializer<YOUR_NAV_ARG_TYPE>`.
+For this, you need to use `@NavTypeSerializer` annotation in a class that implements either `DestinationsNavTypeSerializer<YOUR_NAV_ARG_TYPE>`.
 
 Example:
 ```kotlin
+@Parcelize
 data class Things(
     val thingOne: String,
     val thingTwo: String
-)
+) : Parcelable
+```
 
-// _________________________
-
+```kotlin
 @NavTypeSerializer
-class ThingsNavTypeSerializer : ParcelableNavTypeSerializer<Things> {
+class ThingsNavTypeSerializer : DestinationsNavTypeSerializer<Things> {
 
     override fun toRouteString(value: Things): String {
-        return "${value.thingOne};${value.thingTwo}"
+        return "${value.thing1};${value.thing2}"
     }
 
-    override fun fromRouteString(routeStr: String, jClass: Class<out Things>): Things {
-        return routeStr.split(";").run {
-            Things(get(0), get(1))
-        }
+    override fun fromRouteString(routeStr: String): Things {
+        val things = routeStr.split(";")
+        return Things(things[0], things[1])
     }
 }
 ```
@@ -90,3 +90,7 @@ fun ThingsScreen(
 ```
 
 And the link that would lead users to this screen would be `https://myapp.com/things_screen/thingOne;thingTwo`. Given the above `@NavTypeSerializer` annotated class, the navigation argument received would be created by calling the `fromRouteString` method (so in the end, it would be `Things("thingOne", "thingTwo")`).
+
+:::note
+ For [custom navigation types](destination-arguments/navigation-arguments#custom-navigation-argument-types), since they are so only because you defined a `@NavTypeSerializer`, the string representation in the deep link will need to match what is expected there.
+:::

@@ -4,7 +4,7 @@ sidebar_position: 6
 
 # Navigation Host Composables
 
-Compose destinations has a recommended way to set up your `NavHosts` and an alternative one. If you are not sure which to use and don't have much experience with Compose Navigation, go with the recommended [DestinationsNavHost](#DestinationsNavHost) way. On the other hand, if you have a lot of experience with vanilla Compose Navigation and just want the type safety of Compose Destinations, you might prefer to use [NavHost / AnimatedNavHost](#Vanilla-NavHosts).
+Compose destinations has a recommended way to set up your `NavHosts` and an alternative one. If you are not sure which to use and don't have much experience with Compose Navigation, go with the recommended [DestinationsNavHost](#destinationsnavhost) way. On the other hand, if you have a lot of experience with vanilla Compose Navigation and just want the type safety of Compose Destinations, you might prefer to use [NavHost / AnimatedNavHost](#vanilla-navhosts).
 
 ## DestinationsNavHost 
 
@@ -35,6 +35,8 @@ However, you can override some defaults:
 - `engine: NavHostEngine` - this is the engine that will do all the composable registering in the NavHost. The only reason to override the default here is when you're using `animations-core`, i.e, when you want to animate between screens or have Bottom Sheet destinations. If that is your case, then call `rememberAnimatedNavHostEngine` and pass the result here. Read more [here](styles-and-animations)
 
 - `navController: NavHostController`: If you need to get a hold of the `NavController`, you can use `rememberAnimatedNavController` if you're using `animations-core` and the normal `rememberNavController` if you are not.
+
+- `dependenciesContainerBuilder` offers a `DependenciesContainerBuilder` where you can add dependencies by their class via `com.ramcosta.composedestinations.navigation.dependency()`. The lambda will be called when a Composable screen gets navigated to and `DependenciesContainerBuilder` also implements `com.ramcosta.composedestinations.manualcomposablecalls.DestinationScope` so you can access all information about what `DestinationSpec` is being navigated to. Read more [here](destination-arguments/navhost-level-parameters#use-dependenciescontainerbuilder-to-prepare-dependencies).
 
 - `manualComposableCallsBuilder: ManualComposableCallsBuilder.() -> Unit`: offers a `ManualComposableCallsBuilder` scope where you can
 make manual calls to specific Destination Composables which belong to the `navGraph` passed in here. This can be useful if you need to pass non-navigation arguments to those specific Composables which the library cannot provide. Read more [here](destination-arguments/navhost-level-parameters)

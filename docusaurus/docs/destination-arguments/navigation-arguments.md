@@ -4,6 +4,8 @@ sidebar_position: 1
 
 # Navigation arguments
 
+## Basics
+
 To declare navigation arguments you can just add them to the Composable function:
 
 ```kotlin
@@ -14,13 +16,11 @@ fun ProfileScreen(
 )
 ```
 
-Only arguments of type `String`, `Boolean`, `Int`, `Float`, `Long`, `Parcelable`, `Serializable` and `Enums` will be considered navigation arguments. <br/>
+Only arguments of type `String`, `Boolean`, `Int`, `Float`, `Long`, `Parcelable`, `Serializable`, `Enums` and [custom navigation types](#custom-navigation-argument-types) will be considered navigation arguments.  
 If some of the arguments are not mandatory, i.e they may not be sent when navigating to this screen, you can mark them as nullable or define default values for them.
 
 :::note
-
-Only `String`, `Parcelable`, `Serializable` and `Enums` navigation arguments can be nullable when using Compose Navigation.
-
+Only `String`, `Parcelable`, `Serializable`, `Enums` and [custom navigation types](#custom-navigation-argument-types) navigation arguments can be nullable when using Compose Navigation.
 :::
 
 ```kotlin
@@ -34,7 +34,7 @@ fun ProfileScreen(
 
 Navigation arguments' default values must be resolvable from the generated `Destination` class, so you cannot use private values as default for navigation arguments. 
 
-### Navigation arguments class delegate
+## Navigation arguments class delegate
 
 The above approach is simple and works great if you intend to use the navigation arguments inside the screen Composable. However, if you do not, for example, if you use a ViewModel for that screen and it is the one that will actually use the navigation arguments, it would be awkward to have to declare them in the Composable function.
 
@@ -73,3 +73,42 @@ override fun argsFrom(savedStateHandle: SavedStateHandle): ProfileScreenNavArgs 
 ```
 
 You can use the second one to get the arguments in the ViewModel from the `SavedStateHandle`.
+
+
+## Custom navigation argument types
+
+Besides types that are navigation arguments out of the box, you can make any type be considered a navigation argument type with a one-time easy setup. 
+
+:::info
+This feature can also be used determine how `Parcelable` or `Serializable` types will be represented in the route. This is useful if you want to deep link into a Screen that has one of these navigation arguments. Read more [here](../deeplinks#screens-with-mandatory-parcelableserializable-navigation-arguments).
+:::
+
+You may know that internally, Official Compose Navigation uses string routes to navigate. Well, to make an argument be able to be passed from screen to screen, we need to be able to convert its type to string and back. Hence, there is a `DestinationsNavTypeSerializer` interface that you can implement and annotate with `@NavTypeSerializer` to make code generation consider that type argument a type that can be passed when navigating.
+
+Here is an example:
+
+```kotlin
+import androidx.compose.ui.graphics.Color
+//...
+
+@NavTypeSerializer
+class ColorTypeSerializer : DestinationsNavTypeSerializer<Color> {
+    override fun toRouteString(value: Color): String =
+        value.toArgb().toString()
+
+    override fun fromRouteString(routeStr: String): Color =
+        Color(routeStr.toInt())
+}
+```
+
+After this, you can pass `androidx.compose.ui.graphics.Color` as you would any other navigation argument.
+
+:::caution
+While this feature can be super helpful, remember that you should not be sending big classes in navigation.
+The above example is perfect because `Color` is simple structure.  
+Anyway, Compose Destinations gives you the tools to easily do this so you can test it with less upfront work. This is possible to do with Official Compose Navigation, but the setup has more boilerplate.
+:::
+
+:::note
+If the type is not `Parcelable` nor `Serializable`, the library saves it in the Android `Bundle` as a String. So keep that in mind if you ever try to access the navigation argument directly without using `argsFrom` function of your corresponding `Destination`.
+:::

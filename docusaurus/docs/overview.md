@@ -38,7 +38,8 @@ fun ProfileScreen() { /*...*/ }
 ```
 
 ### 2. Add navigation arguments to the function declaration
-`Parcelable`, `Serializable` and `Enum` types are allowed!
+`Parcelable`, `Serializable` and `Enum` types are allowed with no additional setup!  
+Besides, you can make any type a navigation argument type with a [one-time simple setup](destination-arguments/navigation-arguments#custom-navigation-argument-types).
 
 ```kotlin
 @Destination
