@@ -4,6 +4,7 @@ sidebar_position: 6
 
 # Navigation Host Composables
 
+Navigation Host Composables work as the place where your screens will be displayed.
 Compose destinations has a recommended way to set up your `NavHosts` and an alternative one. If you are not sure which to use and don't have much experience with Compose Navigation, go with the recommended [DestinationsNavHost](#destinationsnavhost) way. On the other hand, if you have a lot of experience with vanilla Compose Navigation and just want the type safety of Compose Destinations, you might prefer to use [NavHost / AnimatedNavHost](#vanilla-navhosts).
 
 ## DestinationsNavHost 
@@ -54,16 +55,14 @@ NavHost( // Replace with AnimatedNavHost if you're using `animations-core`
     startDestination = GreetingScreenDestination.route,
 ) {
     // Replace with `animatedComposable` if you're using `animations-core`
-    composable(GreetingScreenDestination) { args, navBackStackEntry ->
-        GreetingScreen(
-            arg1 = args.arg1,
-            arg2 = args.arg2,
-            //...
+    composable(SomeScreenDestination) { // this: NavGraphBuilderDestinationScope<SomeScreenDestination.NavArgs>
+        SomeScreen(
+            arg1 = navArgs.arg1,
+            arg2 = navArgs.arg2,
+            navigator = destinationsNavigator(navController),
+            resultRecipient = resultRecipient(),
+            resultBackNavigator = resultBackNavigator(navController)
         )
-    }
-    
-    composable(SomeScreenWithoutNavigationArgsDestination) { navBackStackEntry -> //no args param if the destination doesn't have them
-        SomeScreenWithoutNavigationArgs()
     }
 
     // Use `dialogComposable` if the destination has a `style = DestinationStyle.Dialog::class` or subclass
