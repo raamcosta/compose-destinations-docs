@@ -25,6 +25,7 @@ jobs:
       - name: Building it
         run: |
           cd docusaurus/
+          yarn install
           yarn run build
           mv ../docs/CNAME ..
           rm -rf ../docs/{*,.*}
