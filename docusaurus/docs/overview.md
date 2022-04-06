@@ -21,7 +21,7 @@ No need to learn a whole new framework to navigate - most APIs are either the sa
   - Typesafe navigation arguments
   - Simple but configurable navigation graphs setup 
   - Navigating back with a result in a simple and type-safe way
-  - Getting the navigation arguments from the `SavedStateHandle` (useful in ViewModels) and `NavBackStackEntry` in a type-safe way.
+  - Getting the navigation arguments from the `SavedStateHandle` (useful in ViewModels) and `NavBackStackEntry` in a type-safe way
   - Navigation animations through integration with [Accompanist Navigation-Animation](https://github.com/google/accompanist/tree/main/navigation-animation)
   - Bottom sheet screens through integration with [Accompanist Navigation-Material](https://github.com/google/accompanist/tree/main/navigation-material)
   - Easy deep linking to screens
@@ -101,5 +101,5 @@ DestinationsNavHost(navGraph = NavGraphs.root)
 
 This call adds all annotated Composable functions as destinations of the Navigation Host.
 
-That's it! No need to worry about routes, `NavType`, bundles and strings. All that redundant and
+That's it! No need to worry about routes, NavType, bundles and strings. All that redundant and
 error-prone code gets generated for you.
