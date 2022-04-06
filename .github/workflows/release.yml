@@ -28,6 +28,7 @@ jobs:
           yarn install
           yarn run build
           mv ../docs/CNAME ..
-          rm -rf ../docs/{*,.*}
+          rm -rf ../docs/*
+          rm -f ../docs/.nojekyll
           mv ../CNAME ../docs
           cp -a build/. ../docs/
