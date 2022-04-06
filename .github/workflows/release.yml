@@ -32,3 +32,10 @@ jobs:
           rm -f ../docs/.nojekyll
           mv ../CNAME ../docs
           cp -a build/. ../docs/
+
+      - name: Pushing new changes
+        run: |
+          git add .
+          git commit -m "[Github action] release"
+          git push
+
