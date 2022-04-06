@@ -17,15 +17,14 @@ Compose Destinations supports some of these out of the box:
 
 Even though most screen Composables will only need their navigation arguments and some of the components mentioned above, if you have a scenario where you need to pass something else, you can:
 
-[1. Manually call your screen Composable, which is made super easy by the library:]
-manually-call-your-screen-composable)  
+[1. Manually call your screen Composable, which is made super easy by the library](#manually-call-your-screen-composable)  
 This is the preferred way if you want to send something that is tied to Compose runtime (f.ex a `State<Something>`). The other approach uses a `Map<Class<[Component]>, [Component]>` so if `Component` changes your screen won't be recomposed. Also, it is a bit type safer since you are the one calling the Composable function.
 
 [2. Use `dependenciesContainerBuilder` to prepare certain components to certain/all screens](#use-dependenciescontainerbuilder-to-prepare-dependencies)  
 This is simpler if you want to make some component available to multiple screens. It should only be used for passing dependencies which are static for the lifetime of your screens (example: `ViewModels`, `ScaffoldState`, etc).
 
-:::info
-If your annotated Composable has parameters that Compose Destinations cannot provide, are not navigation arguments and you did not either provide them via one of the above approaches, the app will crash at runtime when you navigate to that screen.
+:::caution
+If your annotated Composable has parameters that Compose Destinations cannot provide, are not navigation arguments and you did not provide them via one of the above approaches, the app will crash at runtime when you navigate to that screen.
 :::
 
 ### Manually call your screen Composable
@@ -80,7 +79,8 @@ DestinationsNavHost(
 )
 ```
 
-This lambda will be called everytime a new screen is navigated to to let you prepare components safely scoped to that screen only, since this "container" will not live behond the screen that is navigated to.  
+This lambda will be called everytime a new screen is navigated to to let you prepare components safely scoped to that screen only, since this "container" will not live behond the screen that is navigated to.
+
 After this, you can just add a `ScaffoldState` typed parameter in any annotated Composable, and the library will provide it.
 
 ```kotlin
@@ -92,6 +92,6 @@ fun MyScreen(
 ```
 
 :::info
-This lambda is scoped in a `DependenciesContainerBuilder` which is also a `DestinationScope`. So, everything we have available [when manually calling a Composable screen](#manually-call-your-screen-composable), you also have here, including a `destination` with the `DestinationSpec` that is being navigated to.  
+`dependenciesContainerBuilder` lambda is scoped in a `DependenciesContainerBuilder` which is also a `DestinationScope`. So, everything we have available [when manually calling a Composable screen](#manually-call-your-screen-composable), you also have here, including a `destination` with the `DestinationSpec` that is being navigated to.  
 This enables you to make decisions here and have dependencies only available to specific destinations or specific navigation graphs. ([Check this for an example](../common-use-cases/providing-viewmodels#share-viewmodels-between-multiple-destinations))
 :::
