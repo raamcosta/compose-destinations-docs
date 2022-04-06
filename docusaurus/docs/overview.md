@@ -101,4 +101,4 @@ DestinationsNavHost(navGraph = NavGraphs.root)
 
 This call adds all annotated Composable functions as destinations of the Navigation Host.
 
-That's it! No need to worry about routes, `NavType`s, bundles and strings. All that redundant and error-prone code gets generated for you.
+That's it! No need to worry about routes, NavTypes, bundles and strings. All that redundant and error-prone code gets generated for you.
