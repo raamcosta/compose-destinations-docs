@@ -27,6 +27,13 @@ No need to learn a whole new framework to navigate - most APIs are either the sa
   - Easy deep linking to screens
   - All you can do with Official Jetpack Compose Navigation but in a simpler safer way!
 
+## Materials
+
+- Philipp Lackner's Youtube video [_Compose Navigation Just Got SO MUCH EASIER_ 😱](https://www.youtube.com/watch?v=Q3iZyW2etm4)
+- Yanneck Reiß's [_Type Safe Navigation With Jetpack Compose Destinations_](https://medium.com/codex/type-save-navigation-with-jetpack-compose-destinations-610514e85370)
+- Google Dev Expert Kenji Abe's [_Navigation Composeを便利にしてくれるライブラリ_](https://star-zero.medium.com/navigation-compose%E3%82%92%E4%BE%BF%E5%88%A9%E3%81%AB%E3%81%97%E3%81%A6%E3%81%8F%E3%82%8C%E3%82%8B%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA-c2d0133b3e84)
+- Rafael Costa's [_Compose Destinations: simpler and safer navigation in Compose with no compromises_](https://proandroiddev.com/compose-destinations-simpler-and-safer-navigation-in-compose-with-no-compromises-74a59c6b727d)
+
 ## Basic Usage
 
 ### 1. Annotate your screen Composables with `@Destination`

@@ -73,22 +73,23 @@ Read more about the next steps to configure these features [here](styles-and-ani
 
 
 ### 3. And finally, you need to make sure the IDE looks at the generated folder
-See KSP related [issue](https://github.com/google/ksp/issues/37).
-An example for the debug/release variant would be:
+See KSP related [issue](https://github.com/google/ksp/issues/37).  
+Here is an example of how to do that for all your build variants:
 
 <Tabs>
   <TabItem value="groovy" label=".gradle" default>
 
 ```groovy title=build.gradle
-kotlin {
-    sourceSets {
-        debug {
-            kotlin.srcDir("build/generated/ksp/debug/kotlin")
-        }
-        release {
-            kotlin.srcDir("build/generated/ksp/release/kotlin")
+android {
+  //...
+
+  applicationVariants.all { variant ->
+    kotlin.sourceSets {
+        getByName(variant.name) {
+            kotlin.srcDir("build/generated/ksp/${variant.name}/kotlin")
         }
     }
+  }
 }
 ```
   
@@ -96,17 +97,22 @@ kotlin {
   <TabItem value="kotlin" label=".gradle.kts">
 
 ```kotlin title=build.gradle.kts
-kotlin {
-    sourceSets {
-        debug {
-            kotlin.srcDir("build/generated/ksp/debug/kotlin")
-        }
-        release {
-            kotlin.srcDir("build/generated/ksp/release/kotlin")
+android {
+  //...
+  
+  applicationVariants.all {
+    kotlin.sourceSets {
+        getByName(name) {
+            kotlin.srcDir("build/generated/ksp/$name/kotlin")
         }
     }
+  }
 }
 ```
 
   </TabItem>
 </Tabs>
+
+:::caution Important!
+Replace `applicationVariants` with `libraryVariants` if the module uses `'com.android.library'` plugin!
+:::
