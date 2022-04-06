@@ -20,6 +20,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_ACTIONS_TOKEN }}
 
       # Runs a set of commands using the runners shell
       - name: Building it
@@ -34,8 +36,6 @@ jobs:
           cp -a build/. ../docs/
 
       - name: Pushing new changes
-        with:
-          token: ${{ secrets.GH_ACTIONS_TOKEN }}
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
