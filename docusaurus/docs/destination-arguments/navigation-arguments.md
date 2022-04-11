@@ -16,7 +16,7 @@ fun ProfileScreen(
 )
 ```
 
-Only arguments of type `String`, `Boolean`, `Int`, `Float`, `Long`, `Parcelable`, `Serializable`, `Enums` and [custom navigation types](#custom-navigation-argument-types) will be considered navigation arguments.  
+Only arguments of type `String`, `Boolean`, `Int`, `Float`, `Long`, `Parcelable`, `Serializable`, `Enums`,  [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization) and [custom navigation types](#custom-navigation-argument-types) will be considered navigation arguments.  
 If some of the arguments are not mandatory, i.e they may not be sent when navigating to this screen, you can mark them as nullable or define default values for them.
 
 :::note
