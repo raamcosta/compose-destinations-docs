@@ -27,7 +27,7 @@ DestinationsNavHost(navGraph = NavGraphs.root)
 
 However, you can override some defaults:
 
-- `navGraph: NavGraphSpec` - In case you have multiple top-level navigation graphs or [you have disabled the generation of `NavGraphs`](defining-navgraphs#manually-defining-navigation-graphs) you can pass a specific one here. If not, it will always be `NavGraphs.root`.
+- `navGraph: NavGraphSpec` - By default `NavGraphs.root`, but it can change depending on your [navigation graphs setup](defining-navgraphs). Only destinations that belong to this navigation graph or its nested navigation graphs can be navigated to using the `NavController` connected to this navigation host.
 
 - `modifier: Modifier` - modifier applied to this Composable. It affects the screen Composable.
 

@@ -37,7 +37,7 @@ fun BottomBar(
     navController: NavController
 ) {
     val currentDestination: Destination? = navController.currentBackStackEntryAsState()
-        .value?.navDestination
+        .value?.appDestination()
 
     BottomNavigation {
         BottomBarDestination.values().forEach { destination ->
@@ -56,8 +56,8 @@ fun BottomBar(
 }
 ```
 :::note
-The above `navDestination` is just a handy generated extension property when in "singlemodule" mode (read about configurations [here](../codegenconfigs)).  
-It internally uses `NavBackStackEntry.destinationSpec(navGraph: NavGraphSpec)` from the core library, so if you have a multi-module app, you can use that method instead to get the destination spec corresponding to a given `NavBackStackEntry` in a given `NavGraphSpec` (you can just use the root one that contains all destinations in its tree).
+The above `appDestination()` is just a handy generated extension function when in "singlemodule" mode (read about configurations [here](../codegenconfigs)).  
+It internally uses `NavBackStackEntry.destination(navGraph: NavGraphSpec)` from the core library, so if you have a multi-module app, you can use that method instead to get the destination spec corresponding to a given `NavBackStackEntry` in a given `NavGraphSpec` (you can just use the root one that contains all destinations in its tree).
 :::
 
 **Finally, use the Composable on your Scaffold's `bottomBar` slot**

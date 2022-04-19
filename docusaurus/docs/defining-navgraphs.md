@@ -36,6 +36,71 @@ In some situations, however, you might want to:
 
 ## Generating navigation graphs
 
+### Through @NavGraph annotations
+
+To define a navigation graph, you need to create an annotation class annotated with `@NavGraph`. For example:
+
+```kotlin
+@NavGraph
+annotation class SettingsNavGraph(
+    val start: Boolean = false
+)
+```
+
+Note the `start` parameter. It is mandatory and it is enforced at compile time. The `NavGraph` annotation has two parameters: 
+- `default` : if true, then all `@Destination` Composable functions that don't specify a navigation graph, will belong to it. There is a `@RootNavGraph` in the core library that by default takes this role if no other sets `default = true`.
+There can only be one default navigation graph per module. This is enforced at compile time.
+- `route` : the route of the navigation graph. By default, the name of the annotation class will be used (without 'NavGraph') suffix and in snake case.
+
+To make destinations part of this navigation graph, you need to annotate them with it!
+
+```kotlin
+@SettingsNavGraph(start = true)
+@Destination
+@Composable
+fun SettingsMainScreen()
+```
+
+Remember the `start` parameter? You can use it on the destination you wish to use as the start destination of that navigation grahp.
+
+To this navigation graph nested in some other navigation graph, annotate it with the parent's annotation!
+
+```kotlin
+@RootNavGraph
+@NavGraph
+annotation class SettingsNavGraph(
+    val start: Boolean = false
+)
+```
+
+This makes `settings` a nested navigation graph of `root`. It's that simple. If you don't set any parent of a navigation graph, then it will be a "top-level" one, ideal to pass to a `DestinationsNavHost` call.
+
+You can also make nested navigation graphs the start of a parent navigation graph. Just as you do with destinations, you only need to use `start = true`:
+
+```kotlin
+@RootNavGraph(start = true)
+@NavGraph
+annotation class YourNavGraph(
+    val start: Boolean = false
+)
+```
+
+This makes `your` nav graph be nested in `root` and be its starting route.
+
+<div style={{textAlign: 'center'}}>
+...
+</div>
+
+<!-- I'm still on Compose and this is a vertical Spacer 💪 (yeah I'm that good at web dev) -->
+<div style={{textAlign: 'center', padding: 15}}> 
+</div>
+
+With this mechanism of making navigation graphs and use their annotations to annotate either nested navigation graphs or the destinations that should belong to it, you can make an entire graph in any way you may want.
+
+The most common use case, is to create nested navigation graphs inside root (like in the above `SettingsNavGraph` example) and pass `NavGraphs.root` to `DestinationsNavHost`. This way, all destinations and navgraphs belong to the root one, and they get registered in the `DestinationsNavHost` call.
+
+### (DEPRECATED) Through @Destination annotation
+
 By default, Compose Destinations reads info from your `@Destination` annotations to build the `NavGraphs` object.
 If you want some screens to be part of a nested navigation graph, you can use the `navGraph` argument of `@Destination` annotation:
 

@@ -45,7 +45,7 @@ fun ProfileScreen() { /*...*/ }
 ```
 
 ### 2. Add navigation arguments to the function declaration
-`Parcelable`, `Serializable` and `Enum` types are allowed with no additional setup!  
+`Parcelable`, `Serializable`, `Enum` types and classes annotated with [`@kotlinx.serialization.Serializable`](https://github.com/Kotlin/kotlinx.serialization) are allowed with no additional setup!  
 Besides, you can make any type a navigation argument type with a [one-time simple setup](destination-arguments/navigation-arguments#custom-navigation-argument-types).
 
 ```kotlin
@@ -72,9 +72,10 @@ Or `./gradlew kspDebugKotlin`, which should be faster, to generate all the Desti
 It will have the correct typed arguments.
 
 ```kotlin
+@RootNavGraph(start = true) // sets this as the start destination of the default nav graph
 @Destination
 @Composable
-fun SomeOtherScreen(
+fun HomeScreen(
    navigator: DestinationsNavigator
 ) {
    /*...*/
@@ -95,7 +96,7 @@ DestinationsNavHost(navGraph = NavGraphs.root)
 
 :::info
 
-`NavGraphs` is a generated file that describes your navigation graphs and their destinations. By default all destinations will belong to "root", but you can use the `navGraph` argument of the annotation to have certain screens in nested navigation graphs.
+`NavGraphs` is a generated file that describes your navigation graphs and their destinations. By default all destinations will belong to "root" (@RootNavGraph), but you can create your own nav graphs annotations to have certain screens in other navigation graphs.
 
 :::
 

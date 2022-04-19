@@ -13,6 +13,8 @@ Each destination can have one of these styles:
 - [Dialog](#dialog-style)
 - [BottomSheet](#bottomsheet-style)
 - [Animated](#animated-style)
+- [Runtime](#runtime-style)
+
 
 See also: [Common setup for Animations and Bottom Sheets](#animations-setup)
 
@@ -103,7 +105,7 @@ object ProfileTransitions : DestinationStyle.Animated {
 ```kotlin
     //...
 
-        return when (initialState.navDestination) {
+        return when (initialState.appDestination()) {
             GreetingScreenDestination ->
                 slideInHorizontally(
                     initialOffsetX = { 1000 },
@@ -115,7 +117,7 @@ object ProfileTransitions : DestinationStyle.Animated {
 
     override fun AnimatedContentScope<NavBackStackEntry>.exitTransition(): ExitTransition? {
 
-        return when (targetState.navDestination) {
+        return when (targetState.appDestination()) {
             GreetingScreenDestination ->
                 slideOutHorizontally(
                     targetOffsetX = { -1000 },
@@ -127,7 +129,7 @@ object ProfileTransitions : DestinationStyle.Animated {
 
     override fun AnimatedContentScope<NavBackStackEntry>.popEnterTransition(): EnterTransition? {
 
-        return when (initialState.navDestination) {
+        return when (initialState.appDestination()) {
             GreetingScreenDestination ->
                 slideInHorizontally(
                     initialOffsetX = { -1000 },
@@ -139,7 +141,7 @@ object ProfileTransitions : DestinationStyle.Animated {
 
     override fun AnimatedContentScope<NavBackStackEntry>.popExitTransition(): ExitTransition? {
 
-        return when (targetState.navDestination) {
+        return when (targetState.appDestination()) {
             GreetingScreenDestination ->
                 slideOutHorizontally(
                     targetOffsetX = { 1000 },
@@ -191,5 +193,32 @@ val navHostEngine = rememberAnimatedNavHostEngine(
         ),
         NavGraphs.otherNestedGraph to NestedNavGraphDefaultAnimations.ACCOMPANIST_FADING
     ) // all other nav graphs not specified in this map, will get their animations from the `rootDefaultAnimations` above.
+)
+```
+
+## Runtime Style
+
+This style is just a marker for KSP task to keep the style of a Destination open at compile time. When using it, you need to manualy call the setter of the style on the corresponding generated Destination at runtime before calling `DestinationsNavHost`. If you don't, it will crash with appropriate error message.
+
+This feature is useful when you want to use style classes defined on different modules, which might be the only option when for example the style is `Animated` and you need to reference Destinations from other modules.
+
+Example:
+
+```kotlin
+@Destination(style = DestinationStyle.Runtime::class)
+@Composable
+fun YourScreen(
+    //...
+) { /*...*/ }
+```
+
+And then wherever you call `DestinationsNavHost`
+
+```kotlin
+// YourScreenTransitions being an object that implements DestinationStyle.Animated (for example)
+YourScreenDestination.style = YourScreenTransitions
+
+DestinationsNavHost(
+    //...
 )
 ```

@@ -30,8 +30,8 @@ const val PROFILE_NAV_GRAPH = "profile"
 
 @Destination(
     route = PROFILE_SCREEN_ROUTE,
-    start = true,
-    navGraph = PROFILE_NAV_GRAPH,
+    start = true, // DEPRECATED, read below!
+    navGraph = PROFILE_NAV_GRAPH, // DEPRECATED, read below!
     navArgsDelegate = ProfileScreenNavArgs::class,
     deepLinks = [DeepLink(uriPattern = "https://destinationssample.com/$FULL_ROUTE_PLACEHOLDER")],
     style = ProfileScreenTransitions::class
@@ -48,9 +48,9 @@ data class ProfileScreenNavArgs(
 ```
 
 * `route` - This is a way to override the default route for this destination (which would be "profile_screen" in this case)
-* `start` - If true (default is false), marks this destination as the start of its navigation graph. In this case, since this would belong to the "profile" navigation graph (as defined in the `navGraph`) when navigating to that nested navigation graph, this screen would be shown.
+* [(DEPRECATED - read here)](defining-navgraphs#generating-navigation-graphs) `start` - If true (default is false), marks this destination as the start of its navigation graph. In this case, since this would belong to the "profile" navigation graph (as defined in the `navGraph`) when navigating to that nested navigation graph, this screen would be shown.
 Each navigation graph needs one and only one start destination. A compile-time check is in place to ensure this.
-* `navGraph` - By default it will be "root". All destinations that do not specify other with this argument, will belong to the "root" navigation graph. In the case of the example, the destination would belong to the "profile" navigation graph which will be nested in the "root" one. All other destinations with the same `navGraph` argument would also belong to it. You can read more about nested navigation graphs [here](defining-navgraphs).
+* [(DEPRECATED - read here)](defining-navgraphs#generating-navigation-graphs) `navGraph` - By default it will be "root". All destinations that do not specify other with this argument, will belong to the "root" navigation graph. In the case of the example, the destination would belong to the "profile" navigation graph which will be nested in the "root" one. All other destinations with the same `navGraph` argument would also belong to it. You can read more about nested navigation graphs [here](defining-navgraphs).
 * `navArgsDelegate` - a way to delegate the navigation arguments to some other data class. Read more [here](destination-arguments/navigation-arguments#navigation-arguments-class-delegate)
 * `deepLinks` - define deep links to this destination. Read more [here](deeplinks)
 * `style` - class that defines the style the destination is shown in or is animated when entering or leaving the screen. Read more [here](styles-and-animations)
@@ -62,7 +62,11 @@ Here is an example:
 
 ```kotlin title=ProfileScreenDestination.kt
 object ProfileScreenDestination : TypedDestination<ProfileScreenNavArgs> {
-         
+
+    override operator fun infoke(navArgs: ProfileScreenNavArgs): Direction {
+        //...
+    }
+    
     operator fun invoke(
         arg1: Long,
         arg2: String,
@@ -115,7 +119,7 @@ If not using `navArgsDelegate` in the annotation, a generated class with name `N
 
 The other fields/methods from `Destination` interface are used to build the navigation graph when calling `DestinationsNavHost`. Usually, there are no reasons to use them in your code.
 
-You can get the `Destination` correspondent to a certain `NavBackStackEntry` with the `navDestination` extensions which can be found in `CoreExtensions.kt`.
+You can get the `Destination` correspondent to a certain `NavBackStackEntry` with the `appDestination` extensions which can be found in `SingleModuleExtensions.kt`.
 
 Besides, `Destination` is a sealed interface, which opens possibilities for your logic to make sure is applied to all of them.
 A nice example of using it is to make some extension functions/properties, like this:

@@ -134,12 +134,11 @@ fun AppNavigation(
 }
 ```
 
-Then a screen that belongs to "settings" navigation graph could just do:
+Then a screen that belongs to `SettingsNavGraph` navigation graph could just do:
 
 ```kotlin
-@Destination(
-    navGraph = "settings"
-)
+@SettingsNavGraph
+@Destination
 @Composable
 fun MainSettingsScreen(
     settingsViewModel: SettingsViewModel
