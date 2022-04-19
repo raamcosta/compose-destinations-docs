@@ -33,9 +33,10 @@ No need to learn a whole new framework to navigate - most APIs are either the sa
 - Rafael Costa's blog post [_Compose Destinations: simpler and safer navigation in Compose with no compromises_](https://proandroiddev.com/compose-destinations-simpler-and-safer-navigation-in-compose-with-no-compromises-74a59c6b727d)
 - Yanneck Reiß's blog post [_Type Safe Navigation With Jetpack Compose Destinations_](https://medium.com/codex/type-save-navigation-with-jetpack-compose-destinations-610514e85370)
 - Google Dev Expert Kenji Abe's blog post [_Navigation Composeを便利にしてくれるライブラリ_](https://star-zero.medium.com/navigation-compose%E3%82%92%E4%BE%BF%E5%88%A9%E3%81%AB%E3%81%97%E3%81%A6%E3%81%8F%E3%82%8C%E3%82%8B%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA-c2d0133b3e84)
-- aseem wangoo's:
-   - Youtube video [_Using compose destinations for navigation | Navigation in Compose_](https://www.youtube.com/watch?v=WGcknKt0jkE)
-   - Blog post [_Using compose destinations_](https://dev.to/aseemwangoo/using-compose-destinations-158d?utm_source=dormosheio&utm_campaign=dormosheio)
+- aseem wangoo's blog post (and Youtube video inside): [_Using compose destinations_](https://flatteredwithflutter.com/using-compose-destinations%ef%bf%bc/)
+
+
+
 
 ## Basic Usage
 
