@@ -119,12 +119,8 @@ Each navigation graph needs one and only one start destination. A compile check 
 
 ## Manually defining navigation graphs
 
-The above approach is simple and works for most apps that:
-- only have a single `DestinationsNavHost` call
-- don't need multiple levels of nested navigation graphs (since each destination can only either belong to the "root" nav graph or belong to a nested nav graph which is a direct child of "root").
-
-If your app has needs that don't align with these restrictions or if you prefer to have more control, you can manually instantiate `NavGraph`s which (as shown above) is just a normal data class.
-If you do this, we recommend having a globally accessible object containing the `NavGraph`s since they don't contain any state and you can easily pass them to the `DestinationNavHost` calls, check if certain `Destination` belongs to some graph, get the `Destination` corresponding to a `NavBackStackEntry`, etc. 
+You can also manually define navigation graphs by instantiating `NavGraphSpec`s which, as shown above, is just a normal interface. If your app is multi module, you'll likely have to do it, so that you can gather all destinations / nav graphs from other modules into a single "top-level" navigation graph to pass to `DestinationsNavHost` call.
+If you do this, we recommend having a globally accessible object containing the nav graphs since they don't contain any state and you can easily pass them to the `DestinationNavHost` calls, check if certain `Destination` belongs to some graph, get the `Destination` corresponding to a `NavBackStackEntry`, etc. 
 
 That said, you are free to organize them as you prefer. In a big app, it may be better to have multiple of these `NavGraph`s aggregator objects, for example. You can even instantiate this class just as you pass it to `DestinationsNavHost`!
 
@@ -136,7 +132,7 @@ ksp {
 }
 ```
 
-If you disable this task, Compose Destinations will print some warnings if you are using "navGraph" or "start" in any `@Destination` annotation (since these will be ignored).
+If you disable this task, Compose Destinations will print some warnings if you are using `@NavGraph` annotations in any `@Destination` annotation (since these will be ignored).
 
 ## "Vanilla NavHosts"
 
