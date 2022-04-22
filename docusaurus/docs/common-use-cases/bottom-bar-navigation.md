@@ -79,7 +79,7 @@ Scaffold(
 ```
 
 Some considerations:
-1. You could make it so you `BottomBar` Composable only receives the current destination and a lambda to be used when an item gets clicked. This makes your bottom bar more testable and separated from navigation code.
+1. You could make it so your `BottomBar` Composable only receives the current destination and a lambda to be used when an item gets clicked. This makes your bottom bar more testable and separated from navigation code.
 2. If each of your bottom bar items corresponds to different navigation graphs, your `BottomBarDestination` enum could contain `NavGraphSpec`s instead of `DirectionDestinationSpec`.
 3. The actual code to navigate can use save and restore states to implement this in a "multi nav back stack" way (read more in [official article](https://medium.com/androiddevelopers/multiple-back-stacks-b714d974f134) or see an example of it in my [tivi's fork](https://github.com/raamcosta/tivi)).  
 4. Keep in mind that if at any time you need to fallback to using Jetpack Compose Navigation APIs, you can always just get the route by `DestinationSpec.route`. So all approaches you might find out there, can always be implemented with Compose Destinations as well.
