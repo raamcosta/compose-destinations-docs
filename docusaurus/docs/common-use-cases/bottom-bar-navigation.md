@@ -36,8 +36,8 @@ Taking the example from above, that could look something like:
 fun BottomBar(
     navController: NavController
 ) {
-    val currentDestination: Destination? = navController.currentBackStackEntryAsState()
-        .value?.appDestination()
+    val currentDestination: Destination? = navController.appCurrentDestinationAsState().value
+        ?: NavGraphs.root.startAppDestination
 
     BottomNavigation {
         BottomBarDestination.values().forEach { destination ->
@@ -56,8 +56,10 @@ fun BottomBar(
 }
 ```
 :::note
-The above `appDestination()` is just a handy generated extension function when in "singlemodule" mode (read about configurations [here](../codegenconfigs)).  
-It internally uses `NavBackStackEntry.destination(navGraph: NavGraphSpec)` from the core library, so if you have a multi-module app, you can use that method instead to get the destination spec corresponding to a given `NavBackStackEntry` in a given `NavGraphSpec` (you can just use the root one that contains all destinations in its tree).
+The above `appCurrentDestinationAsState()` is just a handy generated extension function when in "singlemodule" mode (read about configurations [here](../codegenconfigs)) that returns a Compose State of the current `Destination` equivalent to `NavController.currentDestinationAsState()` of the core library except that it returns the sealed version of `DestinationSpec`.  
+Same for `startAppDestination` (generated in "singlemodule" mode) vs `startDestination` (core library).
+
+Given the nature of Compose State, it initally is null so we just consider our start destination when that is the case.
 :::
 
 **Finally, use the Composable on your Scaffold's `bottomBar` slot**

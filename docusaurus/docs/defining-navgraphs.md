@@ -61,9 +61,9 @@ To make destinations part of this navigation graph, you need to annotate them wi
 fun SettingsMainScreen()
 ```
 
-Remember the `start` parameter? You can use it on the destination you wish to use as the start destination of that navigation grahp.
+Remember the `start` parameter? You can use it on the destination you wish to use as the start destination of that navigation graph.
 
-To this navigation graph nested in some other navigation graph, annotate it with the parent's annotation!
+To make this navigation graph nested in some other navigation graph, annotate it with the parent's annotation!
 
 ```kotlin
 @RootNavGraph
@@ -122,7 +122,7 @@ Each navigation graph needs one and only one start destination. A compile check 
 You can also manually define navigation graphs by instantiating `NavGraphSpec`s which, as shown above, is just a normal interface. If your app is multi module, you'll likely have to do it, so that you can gather all destinations / nav graphs from other modules into a single "top-level" navigation graph to pass to `DestinationsNavHost` call.
 If you do this, we recommend having a globally accessible object containing the nav graphs since they don't contain any state and you can easily pass them to the `DestinationNavHost` calls, check if certain `Destination` belongs to some graph, get the `Destination` corresponding to a `NavBackStackEntry`, etc. 
 
-That said, you are free to organize them as you prefer. In a big app, it may be better to have multiple of these `NavGraph`s aggregator objects, for example. You can even instantiate this class just as you pass it to `DestinationsNavHost`!
+That said, you are free to organize them as you prefer. In a big app, it may be better to have multiple of these `NavGraph`s aggregator objects, for example. You can even instantiate this class just as you pass it to `DestinationsNavHost`.
 
 Also, it won't make sense for the library to be generating the `NavGraphs` object anymore. You should disable it adding this into your module's `build.gradle`:
 
@@ -139,4 +139,4 @@ If you disable this task, Compose Destinations will print some warnings if you a
 Finally, you can opt to not use `DestinationsNavHost`. This approach is described in more details [here](navhosts#vanilla-navhosts).
 By doing that, you will be defining the Navigation graphs of the `NavHost` while dealing with arguments, and calling the Composables.
 
-In the end, the fact that we included this approach in both sections speaks to why we believe it's not the best approach: you are dealing with multiple concerns and you lose a way to quickly check (both at runtime and by looking at the code) how the Navigation graphs of your app are defined.
+In the end, the fact that we included this approach in both sections speaks to why we believe it's not the best approach: you are dealing with multiple concerns (defining the navigation graphs, getting the nav arguments, calling each composable) and the a way to check (both at runtime and by looking at the code) how the Navigation graphs of your app are defined, is less immediate compared to when you have an object that just contains the information about the graphs.

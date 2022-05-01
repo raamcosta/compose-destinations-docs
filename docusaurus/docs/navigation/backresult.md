@@ -69,7 +69,7 @@ Notice the type arguments of `ResultRecipient`. The first is the `Destination` t
 The `onNavResult` listener will be called every time the `GoToProfileConfirmation` (in this case) calls `navigateBack` on its `ResultBackNavigator` and receives the result sent through that call.
 If `GoToProfileConfirmation` screen is shown and then gets popped out of the back stack and no result is set (examples: it calls `navigateBack` with no result set; it is a dialog and it gets dismissed; etc), then the `onNavResult` gets called with `NavResult.Canceled` so that you can react to this.
 
-**Limitations enforced at compile time:**
+**Safety enforced at compile time:**
 
 1. Screens can have at most one `ResultBackNavigator` argument.
 2. Screens can have at most one `ResultRecipient` per `Destination` type. This means you can have multiple recipients only if they are related to different Destinations.

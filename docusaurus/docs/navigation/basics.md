@@ -6,7 +6,11 @@ sidebar_position: 1
 
 To navigate to a destination you need a `NavController` or a `DestinationsNavigator`. Both are valid arguments for annotated Composables and will be provided by the library at runtime.
 
+:::info
+
 `DestinationsNavigator` is meant only for navigating from one screen to another. If you need some kind of "top-level navigation" (example: Bottom navigation bar, App drawer, etc) you should use the same `NavController` instance you pass to `DestinationsNavHost`.
+
+:::
 
 Then you can:
 
@@ -46,7 +50,7 @@ It is good practice to not depend directly on `NavController` on your Composable
 
 :::note
 
-`DestinationsNavigator` interface contains the main methods used to navigate that you would use with `NavController`. That said, there are missing APIs, for example, navigating with URI. This seemed rare enough that we did not want to complicate `Destinations Navigator`, but, if you have a use case you consider "common" and there is no way to do it with `DestinationsNavigator`, please open an issue so we can consider adding it. In the meantime, you can always fallback to `NavController`, so you are always covered.
+`DestinationsNavigator` interface contains the main methods used to navigate that you would use with `NavController`. That said, there are missing APIs, for example, navigating with URI. This seemed rare enough that we did not want to complicate `DestinationsNavigator`, but, if you have a use case you consider "common" and there is no way to do it with `DestinationsNavigator`, please open an issue so we can consider adding it. In the meantime, you can always fallback to `NavController`, so you are always covered.
 
 :::
 

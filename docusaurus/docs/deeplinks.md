@@ -46,7 +46,7 @@ Besides `uriPattern`, `DeepLink` class has other ways of defining it like `actio
 
 ## Screens with mandatory Parcelable/Serializable navigation arguments
 
-If you have a screen that declares a mandatory navigation argument of `Parcelable`/`Serializable` type, you need to be explicit about how that type is represented in the deep link route you are expecting.
+If you have a screen that declares a mandatory navigation argument of `Parcelable`/`Serializable`/[@kotlinx.serialization.Serializable](https://github.com/Kotlin/kotlinx.serialization) type (or Array of those), you need to be explicit about how that type is represented in the deep link route you are expecting.
 For this, you need to use `@NavTypeSerializer` annotation in a class that implements either `DestinationsNavTypeSerializer<YOUR_NAV_ARG_TYPE>`.
 
 Example:
@@ -94,3 +94,35 @@ And the link that would lead users to this screen would be `https://myapp.com/th
 :::note
  For [custom navigation types](destination-arguments/navigation-arguments#custom-navigation-argument-types), since they are so only because you defined a `@NavTypeSerializer`, the string representation in the deep link will need to match what is expected there.
 :::
+
+## Arrays / ArrayLists arguments on deep links
+
+Array and ArrayList navigation arguments are represented on deep links as comma separated values. If each of those values needs to be "URI encoded" to be safely used on URI, then your commas need to be encoded in the same way twice. This is the only way we can safely parse the value from the route without considering other possible commas that could otherwise be present on one of the values.
+
+So:
+- **If your app is the one prepraring the URI for the deep link** (example: to pass to a notification) you can use the corresponding NavType `serializeValue` method to get a value for a specific argument that the same NavType will be able to parse.
+- **If the deep link is prepared from outside the app**, remember that the commas need to be "doubly encoded", i.e, you need to separate values with "%252C", for the following types:
+
+- `Array<String>`, `ArrayList<String>`, `Array` and `ArrayList` of `Parcelable`, `Serializable`, `@Serializable` and  [custom nav types](destination-arguments/navigation-arguments#custom-navigation-argument-types).
+
+Taking the same example as above but changing the argument to array:
+
+```kotlin
+@Destination(
+    deepLinks = [
+        DeepLink(uriPattern = "https://myapp.com/things_screen/{things}")
+    ]
+)
+@Composable
+fun ThingsScreen(
+    things: Array<Things>
+) {
+    //...
+}
+```
+
+Now, a deep link for this screen (also considering the above `@NavTypeSerializer`) would be something like:
+
+`https://myapp.com/things_screen/thingOne;thingTwo%252CthingThree;thingFour`
+
+And this would result in the app navigating to the above `ThingsScreen` with a navigation argument equal to the result of `arrayOf(Things("thingOne", "thingTwo"), Things("thingThree", "thingFour"))`.

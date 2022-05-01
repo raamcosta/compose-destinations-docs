@@ -49,7 +49,7 @@ fun ProfileScreen() { /*...*/ }
 ```
 
 ### 2. Add navigation arguments to the function declaration
-`Parcelable`, `Serializable`, `Enum` types and classes annotated with [`@kotlinx.serialization.Serializable`](https://github.com/Kotlin/kotlinx.serialization) are allowed with no additional setup!  
+`Parcelable`, `Serializable`, `Enum` types and classes annotated with [`@kotlinx.serialization.Serializable`](https://github.com/Kotlin/kotlinx.serialization) (as well as `Array`s and `ArrayList`s of these) are allowed with no additional setup!  
 Besides, you can make any type a navigation argument type with a [one-time simple setup](destination-arguments/navigation-arguments#custom-navigation-argument-types).
 
 ```kotlin

@@ -73,7 +73,7 @@ DestinationsNavHost(
 ```
 
 :::info tip
-If you're using the [default "singlemodule" mode](../codegenconfigs#multi-module-configs), then there is a generated `sealed Destination` and you can switch the above `if(destination is ...` with a `when(destination as Destination)` and that will force you to come here and add a new entry when you add new ViewModels.
+If you're using the [default "singlemodule" mode](../codegenconfigs#multi-module-configs), then there is a generated `sealed Destination` and you can switch the above `if(destination is ...` with a `when(destination as Destination)` and that will force you to come here and add a new entry when you add new Destinations.
 :::
 
 ```kotlin
