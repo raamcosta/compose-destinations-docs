@@ -47,7 +47,7 @@ fun GreetingScreen(
                 // and no value was set (example: dialog/bottom sheet dismissed)
             }
             is NavResult.Value -> {
-                println("result reseived from GoToProfileConfirmationDestination = ${result.value}")
+                println("result received from GoToProfileConfirmationDestination = ${result.value}")
                 // Do whatever with the result received!
                 // Think of it like a button click, usually you want to call
                 // a view model method here or navigate somewhere
