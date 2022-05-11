@@ -63,7 +63,7 @@ Here is an example:
 ```kotlin title=ProfileScreenDestination.kt
 object ProfileScreenDestination : TypedDestination<ProfileScreenNavArgs> {
 
-    override operator fun infoke(navArgs: ProfileScreenNavArgs): Direction {
+    override operator fun invoke(navArgs: ProfileScreenNavArgs): Direction {
         //...
     }
     
