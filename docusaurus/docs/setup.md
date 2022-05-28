@@ -17,7 +17,7 @@ import TabItem from '@theme/TabItem';
 ```groovy title=build.gradle(:app)
 plugins {
     //...
-    id 'com.google.devtools.ksp' version '1.5.31-1.0.1' // Depends on your kotlin version
+    id 'com.google.devtools.ksp' version '1.6.10-1.0.4' // Depends on your kotlin version
 }
 ```
   
@@ -27,7 +27,7 @@ plugins {
 ```kotlin title=build.gradle.kts(:app)
 plugins {
     //...
-    id("com.google.devtools.ksp") version "1.5.31-1.0.1" // Depends on your kotlin version
+    id("com.google.devtools.ksp") version "1.6.10-1.0.4" // Depends on your kotlin version
 }
 ```
 
@@ -38,7 +38,7 @@ plugins {
 The version you chose for the KSP plugin depends on the Kotlin version your project uses.   
 You can check https://github.com/google/ksp/releases for the list of KSP versions, then pick the last release that matches your Kotlin version.
 Example:
-If you're using `1.5.31` Kotlin version, then the last KSP version is `1.5.31-1.0.1`.
+If you're using `1.6.10` Kotlin version, then the last KSP version is `1.6.10-1.0.4`.
 :::
 
 ### 2. Add the dependencies

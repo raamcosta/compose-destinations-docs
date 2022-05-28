@@ -17,9 +17,9 @@ Then you can:
 ```kotlin
 navigator.navigate(GreetingScreenDestination)
 
-// OR using NavController.navigateTo extension function
+// OR using NavController.navigate extension function
 
-navController.navigateTo(GreetingScreenDestination)
+navController.navigate(GreetingScreenDestination)
 ```
 
 Or if the destination has navigation arguments:
@@ -33,10 +33,10 @@ navigator.navigate(ProfileScreenDestination(navArgs))
 ```
 
 ```kotlin
-navController.navigateTo(ProfileScreenDestination(id = 1, groupName = "Kotlin 4ever <3"))
+navController.navigate(ProfileScreenDestination(id = 1, groupName = "Kotlin 4ever <3"))
 // OR
 val navArgs = ProfileScreenDestination.NavArgs(id = 1, groupName = "Kotlin 4ever <3")
-navController.navigateTo(ProfileScreenDestination(navArgs))
+navController.navigate(ProfileScreenDestination(navArgs))
 ```
 
 :::info

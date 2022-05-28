@@ -65,16 +65,12 @@ Even though this method is usually more appropriate to prepare dependencies whic
 ```kotlin
 DestinationsNavHost(
     dependenciesContainerBuilder = { //this: DependenciesContainerBuilder<*>
-        if (destination is MyScreenDestination) {
-            dependency(hiltViewModel<MyScreenViewModel>())
-        }
+        dependency(MyScreenDestination) { hiltViewModel<MyScreenViewModel>() }
     }
 )
 ```
 
-:::info tip
-If you're using the [default "singlemodule" mode](../codegenconfigs#multi-module-configs), then there is a generated `sealed Destination` and you can switch the above `if(destination is ...` with a `when(destination as Destination)` and that will force you to come here and add a new entry when you add new Destinations.
-:::
+And then: 
 
 ```kotlin
 @Destination
@@ -118,16 +114,16 @@ fun AppNavigation(
         //...
         dependenciesContainerBuilder = { //this: DependenciesContainerBuilder<*>
 
-            // To tie SettingsViewModel to "settings" nested navigation graph, 
+            // 👇 To tie SettingsViewModel to "settings" nested navigation graph, 
             // making it available to all screens that belong to it
-            if (NavGraphs.settings.contains(destination)) {
-                val parentEntry = remember { 
-                    navController.getBackStackEntry(NavGraphs.settings.route) 
+            dependency(NavGraphs.settings) {
+                val parentEntry = remember(navBackStackEntry) {
+                    navController.getBackStackEntry(NavGraphs.settings.route)
                 }
-                dependency(hiltViewModel<SettingsViewModel>(parentEntry))
+                viewModel<SettingsViewModel>(parentEntry)
             }
 
-            // To tie ActivityViewModel to the activity, making it available to all destinations
+            // 👇 To tie ActivityViewModel to the activity, making it available to all destinations
             dependency(hiltViewModel<ActivityViewModel>(activity))
         }
     )

@@ -91,7 +91,29 @@ fun MyScreen(
 ) { /*...*/ }
 ```
 
+If you want to provide dependencies to a specific Destination or a specific navigation graph (i.e all destinations that are direct children), you can do:
+
+```kotlin
+val scaffoldState = rememberScaffoldState()
+
+DestinationsNavHost(
+    dependenciesContainerBuilder = { //this: DependenciesContainerBuilder<*>
+        // 👇 Provides scaffoldState to "YourSpecificDestination"
+        dependency(YourSpecificDestination) { scaffoldState }
+
+        // 👇 Provides SettingsViewModel scoped to the "settings" nav graph to all
+        // destinations who request it and are direct children of "settings" nav graph
+        dependency(NavGraphs.settings) {
+            val parentEntry = remember(navBackStackEntry) {
+                navController.getBackStackEntry(NavGraphs.settings.route)
+            }
+            viewModel<SettingsViewModel>(parentEntry)
+        }
+    }
+)
+```
+
 :::info
 `dependenciesContainerBuilder` lambda is scoped in a `DependenciesContainerBuilder` which is also a `DestinationScope`. So, everything we have available [when manually calling a Composable screen](#manually-call-your-screen-composable), you also have here, including a `destination` with the `DestinationSpec` that is being navigated to.  
-This enables you to make decisions here and have dependencies only available to specific destinations or specific navigation graphs. ([Check this for an example](../common-use-cases/providing-viewmodels#share-viewmodels-between-multiple-destinations))
+This enables you to make decisions here and have dependencies only available to specific destinations or specific navigation graphs or any other case you might have.
 :::

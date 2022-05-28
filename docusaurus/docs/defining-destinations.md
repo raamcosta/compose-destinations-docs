@@ -30,8 +30,8 @@ const val PROFILE_NAV_GRAPH = "profile"
 
 @Destination(
     route = PROFILE_SCREEN_ROUTE,
-    start = true, // !! DEPRECATED, read below!
-    navGraph = PROFILE_NAV_GRAPH, // !! DEPRECATED, read below!
+    start = true, // ❗️ DEPRECATED, read below!
+    navGraph = PROFILE_NAV_GRAPH, // ❗️ DEPRECATED, read below!
     navArgsDelegate = ProfileScreenNavArgs::class,
     deepLinks = [DeepLink(uriPattern = "https://destinationssample.com/$FULL_ROUTE_PLACEHOLDER")],
     style = ProfileScreenTransitions::class
@@ -113,15 +113,16 @@ object ProfileScreenDestination : TypedDestination<ProfileScreenNavArgs> {
 Some points about generated Destinations:
 
 - You can invoke these `Destinations` to create a valid `Direction` object you can then pass to the navigators. Read more about navigation [here](navigation/basics).
-Another reason to interact with `Destinations` is when using the `argsFrom` methods which can be used to get the navigation arguments in the form of a `data class` from either a `NavBackStackEntry` or a `SavedStateHandle`.
+
+- Another reason to interact with `Destinations` is when using the `argsFrom` methods which can be used to get the navigation arguments in the form of a `data class` from either a `NavBackStackEntry` or a `SavedStateHandle`.
 
 - If not using `navArgsDelegate` in the annotation, a generated class with name `NavArgs` will be nested in the `Destination`. Either way, the `argsFrom` method will return that data class containing your navigation arguments.
 
-- The other fields/methods from `Destination` interface are used to build the navigation graph when calling `DestinationsNavHost`. Usually, there are no reasons to use them in your code.
+- The other fields/methods from `Destination` interface are used to build the navigation graph when calling `DestinationsNavHost`. Usually, there are no reasons to use them in your code. If you feel like you need to use them it might be an indication that there are better ways to do it in the library.
 
-- You can get the `Destination` correspondent to a certain `NavBackStackEntry` with the `appDestination` extensions which can be found in `SingleModuleExtensions.kt`.
+- You can get the `Destination` correspondent to a certain `NavBackStackEntry` with the `appDestination` extensions which can be found in `SingleModuleExtensions.kt`. Or, in case of multi module setup, just `destination()`.
 
-- Besides, `Destination` is a sealed interface, which opens possibilities for your logic to make sure is applied to all of them.
+- Besides, on single navigation module apps, `Destination` is a sealed interface, which opens possibilities for your logic to make sure is applied to all of them.
 A nice example of using it is to make some extension functions/properties, like this:
 
 ```kotlin

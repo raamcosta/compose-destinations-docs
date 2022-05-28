@@ -84,6 +84,14 @@ override fun argsFrom(savedStateHandle: SavedStateHandle): ProfileScreenNavArgs 
 ```
 
 You can use the second one to get the arguments in the ViewModel from the `SavedStateHandle`.
+Or you can use generated extension function `navArgs`:
+```kotlin
+val navArgs: ProfileScreenNavArgs = ProfileScreenDestination.argsFrom(savedStateHandle)
+
+// OR
+
+val navArgs: ProfileScreenNavArgs = savedStateHandle.navArgs()
+```
 
 :::note
 Do not try to access a specific navigation argument by its string key from the `SavedStateHandle` or the `NavBackStackEntry`. Compose Destinations is here to abstract you from this and so internally it may be using
@@ -97,7 +105,7 @@ If you really need to do it for some reason, use the corresponding NavType class
 Besides types that are navigation arguments out of the box, you can make any type be considered a navigation argument type with a one-time easy setup. 
 
 :::info
-This feature can also be used define how `Parcelable` or `Serializable` types will be represented in the route. This is useful if you want to deep link into a Screen that has one of these navigation arguments. Read more [here](../deeplinks#screens-with-mandatory-parcelableserializable-navigation-arguments).
+This feature can also be used to define how `Parcelable` or `Serializable` types will be represented in the route. This is useful if you want to deep link into a Screen that has one of these navigation arguments. Read more [here](../deeplinks#screens-with-mandatory-parcelableserializable-navigation-arguments).
 :::
 
 You may know that internally, Official Compose Navigation uses string routes to navigate. Well, to make an argument be able to be passed from screen to screen, we need to be able to convert its type to string and back. Hence, there is a `DestinationsNavTypeSerializer` interface that you can implement and annotate with `@NavTypeSerializer` to make code generation consider that type argument a type that can be passed when navigating.
@@ -123,5 +131,5 @@ After this, you can pass `androidx.compose.ui.graphics.Color` as you would any o
 :::caution
 While this feature can be super helpful, remember that you should not be sending big classes in navigation.
 The above example is perfect because `Color` is simple structure.  
-Anyway, Compose Destinations gives you the tools to easily do this so you can test it with less upfront work. This is possible to do with Official Compose Navigation, but the setup has more boilerplate.
+Anyway, Compose Destinations gives you the tools to easily do this so you can test it with less upfront work. This is possible to do with Official Compose Navigation, but the setup is way more involved.
 :::

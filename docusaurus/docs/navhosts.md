@@ -4,7 +4,8 @@ sidebar_position: 6
 
 # Navigation Host Composables
 
-Navigation Host Composables work as the place where your screens will be displayed.
+Navigation Host Composables work as the holder for your screens and it's where they will be displayed.
+
 Compose destinations has a recommended way to set up your `NavHosts` and an alternative one. If you are not sure which to use and don't have much experience with Compose Navigation, go with the recommended [DestinationsNavHost](#destinationsnavhost) way. On the other hand, if you have a lot of experience with vanilla Compose Navigation and just want the type safety of Compose Destinations, you might prefer to use [NavHost / AnimatedNavHost](#vanilla-navhosts).
 
 ## DestinationsNavHost 
@@ -46,7 +47,7 @@ make manual calls to specific Destination Composables which belong to the `navGr
 
 If you are experienced with using Compose Navigation, you may prefer using the same NavHost Composables. This is mainly a preference thing, but, in my opinion, having a `NavGraphs` object where you can check your app's destinations and where they belong without all the clutter from the arguments, Composables, etc is beneficial. Besides, being able to quickly and safely check at runtime which navigation graph some route belongs to and getting the `Destination` from the `NavBackStackEntry` can come in handy.
 
-That said, `Destination`s are still very nice to use with the vanilla Composables. There are extension functions on `NavGraphBuilder` that will let you register those destinations in a type-safe way and with much less boilerplate.
+That said, `Destination`s are still very nice to use with the vanilla NavHosts. There are extension functions on `NavGraphBuilder` that will let you register those destinations in a type-safe way and with much less boilerplate.
 Here's an example:
 
 ```kotlin
