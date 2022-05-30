@@ -65,7 +65,7 @@ const config = {
       [
         require.resolve("@easyops-cn/docusaurus-search-local"),
         {
-          indexPages: true,
+          docsRouteBasePath: "/",
           indexBlog: false,
           removeDefaultStopWordFilter: true,
           removeDefaultStemmer: true,
