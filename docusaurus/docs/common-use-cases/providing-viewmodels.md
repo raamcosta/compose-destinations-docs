@@ -120,7 +120,7 @@ fun AppNavigation(
                 val parentEntry = remember(navBackStackEntry) {
                     navController.getBackStackEntry(NavGraphs.settings.route)
                 }
-                viewModel<SettingsViewModel>(parentEntry)
+                hiltViewModel<SettingsViewModel>(parentEntry)
             }
 
             // 👇 To tie ActivityViewModel to the activity, making it available to all destinations
