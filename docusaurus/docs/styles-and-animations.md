@@ -77,13 +77,15 @@ navController.navigatorProvider += bottomSheetNavigator
 
 ModalBottomSheetLayout(
     bottomSheetNavigator = bottomSheetNavigator,
-    //other configuration for you bottom sheet screens, like:
+    // other configuration for you bottom sheet screens, like:
     sheetShape = RoundedCornerShape(16.dp),
 ) {
-    //...
+    // ...
     DestinationsNavHost(
         navController = navController,
-        //...
+        // engine required for the BottomSheet
+        engine = rememberAnimatedNavHostEngine()
+        // ...
     )
 }
 ```
