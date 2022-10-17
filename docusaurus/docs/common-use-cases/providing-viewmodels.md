@@ -211,9 +211,53 @@ class ViewModelFactory(
 }
 ```
 
-As seen above, if you want a single function for all viewModel types, then you need a single `ViewModelFactory` that can create all your types of ViewModels. Alternatively, you could have one function for each ViewModel (example: `profileViewModel()` to get `ProfileViewModel` by using a `ProfileViewModelFactory`).
+As seen above, if you want a single function for all viewModel types, then you need a single `ViewModelFactory` that can create all your types of ViewModels. This does mean that every time you add a new ViewModel to your code base, you'll have to come here and add that entry to the `when` statement above. Nothing is perfect, and this is definitely one reason to make you want to use a Dependency Injection framework like Hilt, so that this is handled for you.
 
-This does mean that every time you add a new ViewModel to your code base, you'll have to come here and add that entry to the `when` statement above. Nothing is perfect, and this is definitely one reason to make you want to use a Dependency Injection framework like Hilt, so that this is handled for you.
+Alternatively, you could have one function for each ViewModel (example: `profileViewModel()` to get `ProfileViewModel` by using a `ProfileViewModelFactory`):
+
+```kotlin
+
+class ProfileViewModel(
+    private val getProfileLikeCountUseCase: GetProfileLikeCountUseCase,
+    private val navArgs: ProfileScreenNavArgs
+): ViewModel(){
+    ...
+}
+
+class ProfileViewModelFactory(
+    private val getProfileLikeCountUseCase: GetProfileLikeCountUseCase
+): AbstractSavedStateViewModelFactory() {
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel?> create(
+        key: String,
+        modelClass: Class<T>,
+        handle: SavedStateHandle
+    ): T {
+        return ProfileViewModel(
+            getProfileLikeCountUseCase,
+            ProfileScreenDestination.argsFrom(handle)
+        ) as T
+    }
+}
+
+@Composable
+fun profileViewModel(): ProfileViewModel {
+    val dependencyContainer = [ACCESS YOUR DEPENDENCIES GRAPH HERE SOMEHOW]
+    val factory = ProfileViewModelFactory(dependencyContainer.getProfileLikeCountUseCase)
+    return viewModel(factory = factory)
+}
+
+@Composable
+@Destination(
+    navArgsDelegate = ProfileScreenNavArgs::class
+)
+fun ProfileScreen(
+    vm: ProfileViewModel = profileViewModel()
+){
+    Text("Profile Screen")
+}
+```
 
 :::info "[ACCESS YOUR DEPENDENCIES GRAPH HERE SOMEHOW]"
 If you're using manual Dependency injection, you must treat this function as you do with accessing your dependencies graph in an Android entry point (Activity, Fragment, etc), i.e, you need to directly access it somehow.  
