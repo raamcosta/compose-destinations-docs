@@ -253,7 +253,7 @@ fun profileViewModel(): ProfileViewModel {
     navArgsDelegate = ProfileScreenNavArgs::class
 )
 fun ProfileScreen(
-    vm: ProfileViewModel = profileViewModel()
+    viewModel: ProfileViewModel = profileViewModel()
 ){
     Text("Profile Screen")
 }
