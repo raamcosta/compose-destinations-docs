@@ -211,9 +211,7 @@ class ViewModelFactory(
 }
 ```
 
-As seen above, if you want a single function for all viewModel types, then you need a single `ViewModelFactory` that can create all your types of ViewModels. This does mean that every time you add a new ViewModel to your code base, you'll have to come here and add that entry to the `when` statement above. Nothing is perfect, and this is definitely one reason to make you want to use a Dependency Injection framework like Hilt, so that this is handled for you.
-
-Alternatively, you could have one function for each ViewModel (example: `profileViewModel()` to get `ProfileViewModel` by using a `ProfileViewModelFactory`):
+As seen above, if you want a single function for all viewModel types, then you need a single `ViewModelFactory` that can create all your types of ViewModels. Alternatively, you could have one function for each ViewModel (example: `profileViewModel()` to get `ProfileViewModel` by using a `ProfileViewModelFactory`):
 
 ```kotlin
 
@@ -225,8 +223,10 @@ class ProfileViewModel(
 }
 
 class ProfileViewModelFactory(
+    owner: SavedStateRegistryOwner,
+    defaultArgs: Bundle?,
     private val getProfileLikeCountUseCase: GetProfileLikeCountUseCase
-): AbstractSavedStateViewModelFactory() {
+): AbstractSavedStateViewModelFactory(owner, defaultArgs) {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(
@@ -242,9 +242,15 @@ class ProfileViewModelFactory(
 }
 
 @Composable
-fun profileViewModel(): ProfileViewModel {
+fun profileViewModel(
+    savedStateRegistryOwner: SavedStateRegistryOwner = LocalSavedStateRegistryOwner.current
+): ProfileViewModel {
     val dependencyContainer = [ACCESS YOUR DEPENDENCIES GRAPH HERE SOMEHOW]
-    val factory = ProfileViewModelFactory(dependencyContainer.getProfileLikeCountUseCase)
+    val factory = ProfileViewModelFactory(
+        owner = savedStateRegistryOwner,
+        defaultArgs = (savedStateRegistryOwner as? NavBackStackEntry)?.arguments,
+        getProfileLikeCountUseCase = dependencyContainer.getProfileLikeCountUseCase
+    )
     return viewModel(factory = factory)
 }
 
@@ -258,6 +264,8 @@ fun ProfileScreen(
     Text("Profile Screen")
 }
 ```
+
+This does mean that every time you add a new ViewModel to your code base, you'll have to come here and add that entry to the `when` statement above, or create a single `ViewModelFactory` per `ViewModel`. Nothing is perfect, and this is definitely one reason to make you want to use a Dependency Injection framework like Hilt, so that this is handled for you.
 
 :::info "[ACCESS YOUR DEPENDENCIES GRAPH HERE SOMEHOW]"
 If you're using manual Dependency injection, you must treat this function as you do with accessing your dependencies graph in an Android entry point (Activity, Fragment, etc), i.e, you need to directly access it somehow.  
