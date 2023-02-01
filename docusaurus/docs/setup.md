@@ -91,6 +91,10 @@ Read more about the next steps to configure these features [here](styles-and-ani
 
 
 ### 3. And finally, you need to make sure the IDE looks at the generated folder
+:::info
+This has been fixed in KSP version `1.8.0-1.0.9` and is therefore only needed if you are using an older version than this.
+:::
+
 See KSP related [issue](https://github.com/google/ksp/issues/37).  
 Here is an example of how to do that for all your build variants:
 
