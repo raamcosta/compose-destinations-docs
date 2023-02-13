@@ -91,6 +91,10 @@ Read more about the next steps to configure these features [here](styles-and-ani
 
 
 ### 3. And finally, you need to make sure the IDE looks at the generated folder
+:::info
+Generated source files are registered automatically since KSP `1.8.0-1.0.9`. If you're using KSP 1.0.9 or newer and don't need to make the IDE aware of generated resources, feel free to skip this section.
+:::
+
 See KSP related [issue](https://github.com/google/ksp/issues/37).  
 Here is an example of how to do that for all your build variants:
 
