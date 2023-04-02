@@ -92,6 +92,12 @@ this will use [Accompanist Navigation-Animation](https://github.com/google/accom
 Read more about the next steps to configure these features [here](styles-and-animations)
 :::
 
+:::info
+If you want to use Compose Destinations in a Wear OS app, replace above core dependency with:
+`implementation 'io.github.raamcosta.compose-destinations:wear-core:<version>'`   
+this will use Wear Compose Navigation internally.   
+Read more about the next steps to configure these features [here](wear-os)
+:::
 
 ### 3. Kotlin version < 1.8
 
