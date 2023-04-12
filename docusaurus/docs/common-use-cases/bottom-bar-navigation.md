@@ -65,7 +65,7 @@ Given the nature of Compose State, it initally is null so we just consider our s
 **Finally, use the Composable on your Scaffold's `bottomBar` slot**
 
 ```kotlin
-val navController = rememberNavController()
+val navController = rememberNavController() // Or rememberAnimatedNavController() if you have animations
 
 Scaffold(
     bottomBar = { 
