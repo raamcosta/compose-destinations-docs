@@ -108,7 +108,7 @@ Here is what that looks like:
 ```kotlin
 @Composable
 fun AppNavigation(
-    activity: Activity
+    activity: ComponentActivity
 ) {
     DestinationsNavHost(
         //...
