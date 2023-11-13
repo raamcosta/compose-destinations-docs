@@ -60,7 +60,7 @@ This style requires you to use `io.github.raamcosta.compose-destinations:animati
 The `DestinationStyle.BottomSheet` is a simple object that you can use to set this style.
 
 ```kotlin
-@Destination(style = DestinationStyle.BottomSheet::class)
+@Destination(style = DestinationStyleBottomSheet::class)
 @Composable
 fun ColumnScope.SomeBottomSheetScreen() { /*...*/ }
 ```
