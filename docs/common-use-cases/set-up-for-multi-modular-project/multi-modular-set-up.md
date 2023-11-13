@@ -224,7 +224,7 @@ private fun getStartDestination(): NavGraphSpec {
 
 **Creating Navigator Interfaces for your Screens**
 
-You need an interface that contains functions to navigate within the app. Therefore, for each Screen ( *Composable marked with `@destionation`* ) create a simple inteface defining navigation functions applicable to that specific screen.
+You need an interface that contains functions to navigate within the app. Therefore, for each Screen ( *Composable marked with `@destination`* ) create a simple inteface defining navigation functions applicable to that specific screen.
 
 ```kotlin
 
