@@ -91,7 +91,7 @@ android {
     ...
     ksp {
         arg("compose-destinations.mode", "[GENERATION_MODE_FOR_MODULE]")
-   arg("compose-destinations.moduleName", "[YOUR_MODULE_NAME")
+        arg("compose-destinations.moduleName", "[YOUR_MODULE_NAME")
     }
 }
 
@@ -102,7 +102,7 @@ dependencies {
     ...
     implementation(libs.compose.destinations.core)
     ksp(libs.compose.destinations.ksp)
-
+}
 ```
 
 According to [the docs](https://composedestinations.rafaelcosta.xyz/codegenconfigs/#multi-module-configs), `GENERATION_MODE_FOR_MODULE` can be replaced with:
@@ -149,7 +149,7 @@ This is the sample code `NavGraphs` object:
 
 object NavGraphs {
 
-    //overview's module NavGraph - defines NavGraph by
+    // overview's module NavGraph - defines NavGraph by
      instantiating NavGraphSpecs
     val overview = object :NavGraphSpec{
 
@@ -172,7 +172,7 @@ object NavGraphs {
 
     val stats = object :NavGraphSpec { ...
 
-    //Root NavGraph showing Overview as the starting screen
+    // root NavGraph showing Overview as the starting screen
 
     val root = object : NavGraphSpec {
         override val route = "root"
@@ -192,18 +192,13 @@ This object gathers the `Navgraphs` from other modules into a single "top-level"
 Inside the `NavGraphs` object, you can also write a helper function to establish which screen to present to the user. For instance if the user is not authenticated, then you need to present the Authentication screen before navigating the user to other screens.
 
 
-
-
 ```kotlin
 ...
 object NavGraphs {
 
-//Util fxn to figure out the starting screen i.e. Auth or Home
+// util fxn to figure out the starting screen 
 
 private fun getStartDestination(): NavGraphSpec {
-
-        //App.create() exists as singleton and can be called severally
-        val user = App.create(Constants.APP_ID).currentUser
 
         return if (user != null && user.loggedIn)
             home
@@ -211,7 +206,7 @@ private fun getStartDestination(): NavGraphSpec {
             auth
     }
 
-//Root NavGraph using getStartDestination() for startRoute
+// root NavGraph using getStartDestination() helper function for startRoute
 
     val root = object : NavGraphSpec {
         override val route = "root"
@@ -336,15 +331,19 @@ override fun onCreate(savedInstanceState: Bundle?) { ...
 
 setContent{
 
-AppTheme {
-                // call DestinationsNavHost on setContent{}
-                AppNavigation(
-                        navController = navController,
-                        modifier = Modifier
-                                .fillMaxSize()
+    AppTheme {
+
+            // call DestinationsNavHost on setContent{}
+            AppNavigation(
+                navController = navController,
+                modifier = Modifier.fillMaxSize()             
                 )
+
             }
-}
+
+            }
+            
+     }
 ```
 :::note
 This is only applicable in version 1 of Compose Destinations Library which can be replaced by a superior future version.
