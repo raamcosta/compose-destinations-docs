@@ -36,7 +36,9 @@ No need to learn a whole new framework to navigate - most APIs are either the sa
 - Google Dev Expert Kenji Abe's blog post [_Navigation Composeを便利にしてくれるライブラリ_](https://star-zero.medium.com/navigation-compose%E3%82%92%E4%BE%BF%E5%88%A9%E3%81%AB%E3%81%97%E3%81%A6%E3%81%8F%E3%82%8C%E3%82%8B%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA-c2d0133b3e84)
 - aseem wangoo's blog post (and Youtube video inside): [_Using compose destinations_](https://flatteredwithflutter.com/using-compose-destinations%ef%bf%bc/)
 
-
+## Community
+Please join the community at Kotlin slack channel: [#compose-destinations](https://kotlinlang.slack.com/archives/C06CS4UCQ10)  
+Ask questions, suggest improvements, or anything else related to the library.
 
 
 ## Basic Usage
