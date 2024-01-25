@@ -63,7 +63,7 @@ Choose the one that matches your Compose version, considering this table:
 </table>
 
 :::caution
-If you choose a version that uses Compose with a higher version then the one you're setting for your app, gradle will upgrade your Compose version via transitive dependency.
+If you choose a version that uses Compose with a higher version than the one you're setting for your app, gradle will upgrade your Compose version via transitive dependency.
 :::
 
 <Tabs>
