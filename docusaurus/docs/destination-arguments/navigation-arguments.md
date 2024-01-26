@@ -71,7 +71,7 @@ fun ProfileScreen() { /*...*/ }
 
 Note that we can also still receive the arguments in the Composable too if we declare a parameter of the `navArgsDelegate` class, but you cannot define any other argument of navigation type (you should not need to anyway). A compile-time check is in place to make sure this is respected.
 
-When using this feature, you'll notice that the generated Destination's `argsFrom` methods will will return the delegate navigation arguments class:
+When using this feature, you'll notice that the generated Destination's `argsFrom` methods will return the delegate navigation arguments class:
 
 ```kotlin
 override fun argsFrom(navBackStackEntry: NavBackStackEntry): ProfileScreenNavArgs {
