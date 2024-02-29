@@ -30,7 +30,7 @@ The class has to be a subclass of the `sealed interface DestinationStyle`.
 ## Default Style
 
 As you probably have guessed, this is the style that's going to be applied to all Destinations that don't explicitly use another style.
-This usually means that no animation and no other special style is used when navigating to it, but, if you're using Compose Destinations `animations-core`, you will be able to change this default to actually have a custom animation. That is done through the arguments of `rememberAnimatedNavHostEngine` call, which you need to do to pass the returned `AnimatedNavHostEngine` into `DestinationsNavHost`.
+This usually means that no animation and no other special style is used when navigating to it, but, if you're using Compose Destinations `animations-core`, you will be able to change this default to actually have a custom animation. That is done through the arguments of `rememberNavHostEngine` call, which you need to do to pass the returned `AnimatedNavHostEngine` into `DestinationsNavHost`.
 
 ## Dialog Style
 
@@ -70,7 +70,7 @@ Notice the `ColumnScope` receiver. This is optional if you're using the bottom s
 Just as if you were working with Accompanist Navigation-Material directly, you will need to wrap your top-most Composable with a `ModalBottomSheetLayout`. 
 
 ```kotlin
-val navController = rememberAnimatedNavController()
+val navController = rememberNavController()
 
 val bottomSheetNavigator = rememberBottomSheetNavigator()
 navController.navigatorProvider += bottomSheetNavigator
@@ -82,9 +82,7 @@ ModalBottomSheetLayout(
 ) {
     // ...
     DestinationsNavHost(
-        navController = navController,
-        // engine required for the BottomSheet
-        engine = rememberAnimatedNavHostEngine()
+        navController = navController
         // ...
     )
 }
@@ -166,26 +164,14 @@ Notice the `AnimatedVisibilityScope` receiver. This scope is available to all "n
 
 ### Animations / Bottom Sheet setup
 
-If you want to use animations between screens or bottom sheet styled screens, you need to:
+- If you want to use bottom sheet styled screens, you need to replace the normal `core` dependency with the `animations-core` (`io.github.raamcosta.compose-destinations:animations-core`) in your module's build.gradle file.
 
-**1.** Replace the normal `core` dependency with the `animations-core` (`io.github.raamcosta.compose-destinations:animations-core`) in your module's build.gradle file.
-
-**2.** Call `rememberAnimatedNavHostEngine` to get an instance of `NavHostEngine` capable of dealing with animations and bottom sheet destinations. 
-
-:::caution
-If you need the `NavController`, use `rememberAnimatedNavController` instead of `rememberNavController`.
-:::
-
-**3.** Pass the `NavHostEngine` in the `DestinationsNavHost` call.
-
-> If you called `rememberAnimatedNavController` then also pass that `NavController`.
-
-`rememberAnimatedNavHostEngine` has a parameter to define the default animations. This will make it so that all destinations with no specified style, will actually enter and exit as defined in that parameter.
+- `rememberNavHostEngine` has a parameter to define the default animations. This will make it so that all destinations with no specified style, will actually enter and exit as defined in that parameter.
 Besides, you can also override this default for specific nested navigation graphs. If you want to do that use the `defaultAnimationsForNestedNavGraph: Map<NavGraph, NestedNavGraphDefaultAnimations>` by mapping with navigation graphs to specific default animation parameters.
-Accompanist `AnimatedNavHost` contains a `contentAlignment` parameter which you can also pass in this call as the `navHostContentAlignment`.
+`DestinationsNavHost` contains a `contentAlignment` parameter which you can also pass in this call as the `navHostContentAlignment`.
 
 ```kotlin
-val navHostEngine = rememberAnimatedNavHostEngine(
+val navHostEngine = rememberNavHostEngine(
     navHostContentAlignment = Alignment.TopCenter,
     rootDefaultAnimations = RootNavGraphDefaultAnimations.ACCOMPANIST_FADING, //default `rootDefaultAnimations` means no animations
     defaultAnimationsForNestedNavGraph = mapOf(

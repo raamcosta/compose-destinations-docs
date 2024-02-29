@@ -12,7 +12,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/logo.svg',
   organizationName: 'raamcosta', // Usually your GitHub org/user name.
   projectName: 'compose-destinations-docs', // Usually your repo name.
 
@@ -25,6 +25,16 @@ const config = {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/raamcosta/compose-destinations-docs/edit/main/docusaurus/',
+          versions: {
+            current: {
+              label: '2.x',
+              path: 'v2' // change to '' when we want to make v2 the default
+            },
+            "1.x": {
+              label: '1.x',
+              path: '', // change to v1 when we want to make v2 the default
+            }
+          },
         },
         blog: false,
         theme: {
@@ -41,9 +51,13 @@ const config = {
         title: 'Compose Destinations',
         logo: {
           alt: 'Compose Destinations Logo',
-          src: 'img/logo.png',
+          src: 'img/logo.svg',
         },
         items: [
+          {
+            type: 'docsVersionDropdown',
+            position: 'right',
+          },
           {
             href: 'https://github.com/raamcosta/compose-destinations',
             label: 'GitHub',
