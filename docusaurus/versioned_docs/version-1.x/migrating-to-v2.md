@@ -98,6 +98,7 @@ fun AnotherScreen() { /*...*/ }
     - sealed `DirectionDestination` -> `DirectionDestinationSpec`
     - sealed `TypedDestination<T>` -> `TypedDestinationSpec<T>`
 
+- `rememberAnimatedNavHostEngine` -> `rememberNavHostEngine`
 - `navArgsDelegate` parameter of `@Destination` renamed to `navArgs`
 - `DestinationSpec<T>` -> `TypedDestinationSpec<T>` 
 - `DestinationSpec<*>` -> `DestinationSpec`
@@ -340,7 +341,7 @@ DestinationsNavHost(
 
 </details>
 
-### 10. If have any custom implementation of a DestinationStyle type
+### 10. If have any custom implementation of a `DestinationStyle` type
 
 <details>
     <summary>Expand</summary>
