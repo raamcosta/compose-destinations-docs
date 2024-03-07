@@ -99,8 +99,8 @@ fun AnotherScreen() { /*...*/ }
     - sealed `TypedDestination<T>` -> `TypedDestinationSpec<T>`
 
 - `navArgsDelegate` parameter of `@Destination` renamed to `navArgs`
-- `DestinationSpec<T>` renamed to `TypedDestinationSpec<T>` 
-- `DestinationSpec<*>` renamed to `DestinationSpec`
+- `DestinationSpec<T>` -> `TypedDestinationSpec<T>` 
+- `DestinationSpec<*>` -> `DestinationSpec`
 - Some core APIs changed package name. If you have some red imports, try deleting the import and importing it again.  
 - Generated code is now on `com.ramcosta.composedestinations.generated` package by default, instead of getting the common part of all destination's package names. If you use "moduleName", then that is suffixed to the above package name.
 So you will have to either set the current package name used on v1 by the library as your "codeGenPackageName" or, you'll need to re-import all Destinations.
@@ -238,7 +238,7 @@ ksp {
 ```
 
 The output is slightly different, on v2 there's an object that contains the list of destinations instead of the field list being top level.
-You can import all destinations to certain nav graph defined in another module by using `@ExternalDestiantion<ModuleDestinationsOutputObject>` in companion object of that nav graph annotation class.
+You can import all destinations to certain nav graph defined in another module by using `@ExternalModuleDestinations<ModuleDestinationsOutputObject>` in companion object of that nav graph annotation class.
 
 
 <h3>"navgraphs" & "singlemodule"</h3>
