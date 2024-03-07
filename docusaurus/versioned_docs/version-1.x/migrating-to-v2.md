@@ -354,9 +354,109 @@ object ProfileTransitions : DestinationStyle.Animated() {
 }
 ```
 
+Besides, specifically for `DestinationStyle.Animated`, it has changed to have getters of lambdas rather than functions.
+This is because this way it results in more one to one with official APIs and it lets us keep some of them as null (instead of returning null).
+Example:
+
+<Tabs>
+  <TabItem value="v1" label="v1" default>
+
+```kotlin
+object ProfileTransitions : DestinationStyle.Animated {
+
+  override fun AnimatedContentTransitionScope<NavBackStackEntry>.enterTransition(): EnterTransition? {
+
+    return when (initialState.destination()) {
+      GreetingScreenDestination ->
+        slideInHorizontally(
+          initialOffsetX = { 1000 },
+          animationSpec = tween(700)
+        )
+      else -> null
+    }
+  }
+
+  override fun AnimatedContentTransitionScope<NavBackStackEntry>.exitTransition(): ExitTransition? {
+
+    return when (targetState.destination()) {
+      GreetingScreenDestination ->
+        slideOutHorizontally(
+          targetOffsetX = { -1000 },
+          animationSpec = tween(700)
+        )
+      else -> null
+    }
+  }
+}
+```
+
+</TabItem>
+<TabItem value="v2" label="v2">
+
+```kotlin
+object ProfileTransitions : DestinationStyle.Animated() {
+
+  override val enterTransition: AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition? = {
+    when (initialState.destination()) {
+      GreetingScreenDestination ->
+        slideInHorizontally(
+          initialOffsetX = { 1000 },
+          animationSpec = tween(700)
+        )
+      else -> null
+    }
+  }
+
+  override val exitTransition: AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition? = {
+    when (targetState.destination()) {
+      GreetingScreenDestination ->
+        slideOutHorizontally(
+          targetOffsetX = { -1000 },
+          animationSpec = tween(700)
+        )
+      else -> null
+    }
+  }
+}
+```
+
+  </TabItem>
+<TabItem value="diff" label="diff">
+
+```diff
+- object ProfileTransitions : DestinationStyle.Animated {
++ object ProfileTransitions : DestinationStyle.Animated() {
+ 
+-    override fun AnimatedContentTransitionScope<NavBackStackEntry>.enterTransition(): EnterTransition? {
+-
+-        return when (initialState.destination()) {
++    override val enterTransition: AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition? = {
++        when (initialState.destination()) {
+             GreetingScreenDestination ->
+                 slideInHorizontally(
+                     initialOffsetX = { 1000 },
+         }
+     }
+ 
+-    override fun AnimatedContentTransitionScope<NavBackStackEntry>.exitTransition(): ExitTransition? {
+-
+-        return when (targetState.destination()) {
++    override val exitTransition: AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition? = {
++        when (targetState.destination()) {
+             GreetingScreenDestination ->
+                 slideOutHorizontally(
+                     targetOffsetX = { -1000 },
+         }
+     }
+```
+
+  </TabItem>
+</Tabs>
+
+
 </details>
 
-### 11. If you are defining Nav graph level animations on `rememberAnimatedNavHostEngine` call
+### 11. If you are defining Nav graph level animations on `rememberAnimatedNavHostEngine` or `rememberNavHostEngine` call
 
 <details>
     <summary>Expand</summary>
