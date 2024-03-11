@@ -255,8 +255,8 @@ These existed to control generation of certain files that are no longer generate
 <details>
     <summary>Expand</summary>
 
-The approach on v1 was not great because it wouldn't allow you to have internal Composable with public generated Destination, which is what makes sense
-on multi module projects.
+The approach on v1 was not great because it wouldn't allow you to have internal Composable with public generated Destination, which is
+what may make sense on some multi module projects.
 
 On v2, you can have any combination though since the annotation lets you control the visibility of the generated Destination.
 Example:
