@@ -113,7 +113,27 @@ To set the "codeGenPackageName" do this in your build.gradle(.kts) file
     }
 ```
 
-### 4. If using your own NavGraph annotations
+### 4. Gradle setup: If using `animations-core`
+<details>
+    <summary>Expand</summary>
+
+<h3>`animations-core` is now `bottom-sheet` that you add alongside the core, not instead of.</h3>
+
+So the core dependency should now always be:
+
+```kotlin
+ksp("io.github.raamcosta.compose-destinations:ksp:<version>")
+implementation("io.github.raamcosta.compose-destinations:core:<version>")
+```
+
+And when using bottom sheet destinations, add also this one:
+
+```kotlin
+implementation("io.github.raamcosta.compose-destinations:bottom-sheet:<version>")
+```
+</details>
+
+### 5. If using your own NavGraph annotations
 <details>
     <summary>Expand</summary>
 
@@ -199,26 +219,6 @@ fun AnotherScreen() { /*...*/ }
   </TabItem>
 </Tabs>
 
-</details>
-
-### 5. If using bottom sheet destinations
-<details>
-    <summary>Expand</summary>
-
-<h3>Animations core is now a bottom sheet that you add alongside the core, not instead of.</h3>
-
-So the core dependency should now be:
-
-```kotlin
-ksp("io.github.raamcosta.compose-destinations:ksp:<version>")
-implementation("io.github.raamcosta.compose-destinations:core:<version>")
-```
-
-And when using bottom sheet destinations, add also this one:
-
-```kotlin
-implementation("io.github.raamcosta.compose-destinations:bottom-sheet:<version>")
-```
 </details>
 
 ### 6. If you have set "compose-destinations.mode" on gradle ksp config
