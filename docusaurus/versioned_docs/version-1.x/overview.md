@@ -6,7 +6,7 @@ slug: /
 # Overview
 
 <div style={{textAlign: 'center'}}>
-  <img width="250" height="250" src="img/logo.svg" />
+  <img width="250" height="250" src="/img/logo.svg" />
 </div>
 
 <!-- I'm still on Compose and this is a vertical Spacer 💪 (yeah I'm that good at web dev) -->
