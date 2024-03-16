@@ -67,6 +67,11 @@ const config = {
         },
         items: [
           {
+            to: 'migrating-to-v2',
+            label: 'Migrate to v2',
+            position: 'left',
+          },
+          {
             type: 'docsVersionDropdown',
             position: 'right',
           },

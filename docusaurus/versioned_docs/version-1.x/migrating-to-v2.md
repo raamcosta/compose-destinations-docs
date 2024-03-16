@@ -694,7 +694,7 @@ annotation class MainGraph {
 :::note Above example
 - Assumes you want to pass MainNavGraph to DestinationsNavHost, otherwise you could also use `@NavGraph<RootGraph>` instead of `@NavHostGraph`
 - On all `ExternalNavGraph`, `ExternalDestination` and `ExternalModuleDestinations`, you can call the annotation's constructor to override (or add depending on the field) stuff like deep links, wrappers, default animations etc.
-- The most common and better way to split navigation graphs on modules is to have feature modules espose a single NavGraph (internally it can contain multiple others) and import it here with `@ExternalNavGraph` as seen above. Other annotations on above example should be less common practices.
+- The most common and better way to split navigation graphs on modules is to have feature modules expose a single NavGraph (internally it can contain multiple others) and import it here with `@ExternalNavGraph` as seen above. Other annotations on above example should be less common practices.
 :::
 
 
