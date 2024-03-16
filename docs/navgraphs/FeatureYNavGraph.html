@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FeatureY Navigation Graph</title>
+</head>
+<body>
+<pre id='scene' class="mermaid">
+---
+title: FeatureY Navigation Graph
+---
+%%{init: {'theme':'base', 'themeVariables': { 'primaryTextColor': '#fff' }}%%
+graph TD
+feature_y(["FeatureYGraph"]) -- "start" --- feature_y_home("FeatureYHome")
+feature_y(["FeatureYGraph"]) --- feature_y_internal_args_screen("FeatureYInternalArgsScreen")
+feature_y(["FeatureYGraph"]) --- sub_feature_y_public_side_screen_destination("SubFeatureYPublicSideScreen 🧩")
+feature_y(["FeatureYGraph"]) --- sub_feature_y_nav_g(["SubFeatureYGraph 🧩"])
+
+click sub_feature_y_nav_g "SubFeatureYNavGraph.html" "See SubFeatureYGraph details" _blank
+
+classDef destination fill:#5383EC,stroke:#ffffff;
+class feature_y_home,feature_y_internal_args_screen,sub_feature_y_public_side_screen_destination destination;
+classDef navgraph fill:#63BC76,stroke:#ffffff;
+class feature_y,sub_feature_y_nav_g navgraph;
+
+</pre>
+<script src='https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js'></script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';</script>
+<script>
+var element = document.getElementById('scene')
+var pz = panzoom(element, {
+  minZoom: 0.5
+});
+
+function reset(e) {
+   pz.moveTo(0, 0); 
+   pz.zoomAbs(0, 0, 1);
+}
+
+function zoomIn(e) {
+   pz.smoothZoom(0, 0, 1.25);
+}
+
+function zoomOut(e) {
+   pz.smoothZoom(0, 0, 0.75);
+}
+
+document.addEventListener('keydown', function(event) {
+    const keycode = event.keyCode;
+    const key = event.key;
+    
+    switch(keycode) {
+        case 82: // R key
+            reset(event);
+            break;
+        case 187: // + key
+            zoomIn(event);
+            break;
+        case 189: // - key
+            zoomOut(event);
+            break;
+    }
+});
+</script>
+</body>
+</html>
