@@ -608,7 +608,7 @@ DestinationsNavHost(
 +            dependency(someOtherDependency)
 +        }
 +    
-+        navgraph(NavGraphs.settings) {
++        navGraph(NavGraphs.settings) {
              val parentEntry = remember(navBackStackEntry) {
                  navController.getBackStackEntry(NavGraphs.settings.route)
              }
