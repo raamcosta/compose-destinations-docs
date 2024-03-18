@@ -23,7 +23,7 @@ No need to learn a whole new framework to navigate - most APIs are either the sa
 - Getting the navigation arguments from the `SavedStateHandle` (useful in ViewModels) and `NavBackStackEntry` in a type-safe way
 - Navigation animations
 - Destination wrappers to allow reusing Compose logic on multiple screens
-- Bottom sheet destinations through integration with [Accompanist Navigation-Material](https://github.com/google/accompanist/tree/main/navigation-material)
+- Bottom sheet destinations
 - Easy deep linking to screens
 - All you can do with Official Jetpack Compose Navigation but in a simpler safer way!
 
