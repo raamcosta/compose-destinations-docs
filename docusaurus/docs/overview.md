@@ -90,7 +90,7 @@ fun HomeScreen(
 ```
 :::note
 
-DestinationsNavigator is a wrapper interface to NavController that if declared as a parameter, will be provided for free by the library. NavController can also be provided in the exact same way, but it ties your composables to a specific implementation which will make it harder to test and preview. Read more [here](navigation/basics)
+DestinationsNavigator is a wrapper interface to NavController that if declared as a parameter, will be provided by the library. NavController can also be provided in the exact same way, but it ties your composables to a specific implementation which will make it harder to test and preview. Read more [here](navigation/basics)
 
 :::
 
