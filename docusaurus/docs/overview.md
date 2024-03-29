@@ -68,7 +68,7 @@ fun ProfileScreen(
 :::info
 
 There is an alternative way to define the destination arguments in case you don't need to use them
-inside the Composable (as is likely the case when using ViewModel). Read more [here](arguments/navigation-arguments).
+inside the Composable (as is likely the case when using ViewModel). Read more [here](arguments/navigation-arguments#destination-navigation-arguments).
 
 :::
 
@@ -90,7 +90,7 @@ fun HomeScreen(
 ```
 :::note
 
-DestinationsNavigator is a wrapper interface to NavController that if declared as a parameter, will be provided by the library. NavController can also be provided in the exact same way, but it ties your composables to a specific implementation which will make it harder to test and preview. Read more [here](navigation/basics)
+DestinationsNavigator is a wrapper interface to NavController that if declared as a parameter, will be provided by the library. NavController can also be provided in the exact same way, but it ties your composables to a specific implementation which will make it harder to test and preview. Read more [here](navigation/basics/#destinationsnavigator-vs-navcontroller)
 
 :::
 
@@ -104,7 +104,7 @@ DestinationsNavHost(navGraph = NavGraphs.root)
 
 `NavGraphs` is a generated file that contains all navigation graphs. 
 `root` here corresponds to the `<RootGraph>` we used in the above examples.
-You're also able to create your own navigation graph annotations to use instead of `<RootGraph>`.
+You're also able to [create your own navigation graph annotations](defining-navgraphs) to use instead of `<RootGraph>`.
 
 :::
 
