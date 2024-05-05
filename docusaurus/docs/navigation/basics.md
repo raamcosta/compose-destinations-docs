@@ -8,14 +8,19 @@ sidebar_position: 1
 
 To navigate to a destination you need a `DestinationsNavigator`.
 
-:::info
 To get a `DestinationsNavigator`:
-    - Simply receive a DestinationsNavigator instead of NavController in your annotated screens.
+    - Simply receive a DestinationsNavigator in your annotated screens.
+
+```kotlin
+@Composable
+fun MyScreen(
+    navigator: DestinationsNavigator
+) { /*...*/ }
+```
 
 Or do (if you need it at a top level such as around `DestinationsNavHost`, bottom bar, etc):
     - navController.rememberDestinationsNavigator() if in a Composable
     - navController.toDestinationsNavigator() if not in a Composable
-:::
 
 Then you can:
 
