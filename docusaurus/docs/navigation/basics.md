@@ -77,7 +77,7 @@ that also needs arguments, then you'll be required to pass all those in.
 modules can navigate to your module's nav graph.
 
 ## DestinationsNavigator vs NavController
-Use `NavController` only when you need APIs that are not available on `DestinationsNavigator`. `DestinationsNavigator` is about navigating and managing the back stack with Compose Destinations friendly and type safe APIs. 
+Use `NavController` only when you need APIs that are not available on `DestinationsNavigator`. `DestinationsNavigator` is about navigating and managing the back stack with Compose Destinations friendly and type safe APIs.  
 Besides, it is good practice to not depend directly on `NavController` on your annotated Composables. You should opt to use `DestinationsNavigator` instead, which is an interface wrapper of `NavController`. Making use of this dependency inversion principle allows you to easily pass an empty implementation (one is available already `EmptyDestinationsNavigator`) for previews or a fake for testing.
 
 :::caution
