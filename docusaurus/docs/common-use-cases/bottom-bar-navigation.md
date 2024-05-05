@@ -36,7 +36,7 @@ Taking the example from above, that could look something like:
 fun BottomBar(
     navController: NavController
 ) {
-    val currentDestination: Destination = navController.currentDestinationAsState().value
+    val currentDestination: DestinationSpec = navController.currentDestinationAsState().value
         ?: NavGraphs.root.startDestination
 
     BottomNavigation {
