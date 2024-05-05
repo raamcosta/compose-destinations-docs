@@ -19,8 +19,8 @@ fun MyScreen(
 ```
 
 Or do (if you need it at a top level such as around `DestinationsNavHost`, bottom bar, etc):
-    - navController.rememberDestinationsNavigator() if in a Composable
-    - navController.toDestinationsNavigator() if not in a Composable
+    - `navController.rememberDestinationsNavigator()` if in a Composable
+    - `navController.toDestinationsNavigator()` if NOT in a Composable
 
 Then you can:
 
