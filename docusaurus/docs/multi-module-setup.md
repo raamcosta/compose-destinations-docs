@@ -27,7 +27,7 @@ ksp {
     arg("compose-destinations.moduleName", "profile")
     // and if you want to generate mermaid graph files for this module's graphs: 
     // (ideally use the same path for all modules, so that navigation in the html works well)
-    arg("compose-destinations.htmlMermaidGraph", "$rootDir//navigation-docs")
+    arg("compose-destinations.htmlMermaidGraph", "$rootDir/navigation-docs")
     arg("compose-destinations.mermaidGraph", "$rootDir/navigation-docs")
 }
 ```
