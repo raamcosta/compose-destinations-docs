@@ -78,8 +78,8 @@ NavHost(
             arg1 = navArgs.arg1,
             arg2 = navArgs.arg2,
             navigator = destinationsNavigator(navController),
-            resultRecipient = resultRecipient(),
-            resultBackNavigator = resultBackNavigator(navController)
+            resultRecipient = resultRecipient(resultTypeNameNavType),
+            resultBackNavigator = resultBackNavigator(navController, anotherResultTypeNameNavType)
         )
     }
 

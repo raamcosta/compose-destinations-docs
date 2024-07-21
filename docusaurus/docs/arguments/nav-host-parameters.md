@@ -45,8 +45,8 @@ DestinationsNavHost(
             navigator = destinationsNavigator, // destinationsNavigator is a `DestinationsNavigator` (also lazily evaluated)
             backStackEntry = navBackStackEntry, // navBackStackEntry is a `DestinationScope` field
             scaffoldState = scaffoldState,
-            resultBackNavigator = resultBackNavigator(), // needed if "SomeScreen" needs to send argument back to previous screen
-            resultRecipient = resultRecipient(), // needed if "SomeScreen" needs to receive results from a forward screen
+            resultBackNavigator = resultBackNavigator(resultTypeNameNavType), // needed if "SomeScreen" needs to send argument back to previous screen
+            resultRecipient = resultRecipient(resultTypeNameNavType), // needed if "SomeScreen" needs to receive results from a forward screen
         )
     }
 }
