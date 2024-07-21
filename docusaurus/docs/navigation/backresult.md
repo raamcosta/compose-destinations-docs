@@ -76,7 +76,7 @@ If `GoToProfileConfirmation` screen is shown and then gets popped out of the bac
 
 1. Screens can have at most one `ResultBackNavigator` argument.
 2. Screens can have at most one `ResultRecipient` per `Destination` type. This means you can have multiple recipients only if they are related to different Destinations.
-3. Result type must be one of `String`, `Boolean`, `Float`, `Int`, `Long`, or `Parcelable`. They can be nullable but in the case of Serializables and Parcelables, they cannot contain type arguments.
+3. Result type must be one of the possible [navigation argument types](arguments/navigation-arguments).
 4. For every `ResultRecipient` of a result type `R`, the corresponding destination must also have a `ResultBackNavigator` of that same `R` type.
 
 ## Multi module result back case
@@ -92,7 +92,7 @@ DestinationsNavHost(
     composable(YourRecipientScreenDestination) {
         YourRecipientScreen(
             //...
-            resultRecipient = resultRecipient<YourConfirmationDestination, Boolean>()
+            resultRecipient = resultRecipient<YourConfirmationDestination, Boolean>(booleanNavType)
         )
     }
 }
@@ -100,6 +100,13 @@ DestinationsNavHost(
 
 As you can see, the place that calls DestinationsNavHost is the one that decides where the result comes from. This way we can use this for multi module apps where there is no dependency between recipient and result destinations.
 
+Also, note the `booleanNavType` in the example above. When you manually invoke these composables, you need to specify the corresponding `NavType` for the result type in both the `resultRecipient` and `resultBackNavigator` cases.
+You can use the IDE autocomplete to find it if you start typing the name of the class, examples:
+
+* `Boolean` and `String` are `booleanNavType` and `stringNavType`;
+* Ktx Serializables, Parcelables, java Serializables, with a `MySerializable` name are `mySerializableNavType`;
+* `Array<String>` and `Array<MySerializable>` are `stringArrayNavType` and `mySerializableArrayNavType`;
+
 :::note
-There is no check at compile time, and it's a bit of manual setup to use this feature. So always prefer to use the type-safe approach unless you can't - usually only when the destinations at play belong to different modules.
+There is no check at compile time, and it's a bit of manual setup to use this feature. So always prefer to use the type-safe approach unless you can't - usually only when the destinations at play belong to different modules that don't depend on one another.
 :::
