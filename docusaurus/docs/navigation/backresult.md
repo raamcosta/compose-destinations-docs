@@ -76,7 +76,7 @@ If `GoToProfileConfirmation` screen is shown and then gets popped out of the bac
 
 1. Screens can have at most one `ResultBackNavigator` argument.
 2. Screens can have at most one `ResultRecipient` per `Destination` type. This means you can have multiple recipients only if they are related to different Destinations.
-3. Result type must be one of the possible [navigation argument types](arguments/navigation-arguments).
+3. Result type must be one of the possible [navigation argument types](../arguments/navigation-arguments).
 4. For every `ResultRecipient` of a result type `R`, the corresponding destination must also have a `ResultBackNavigator` of that same `R` type.
 
 ## Multi module result back case

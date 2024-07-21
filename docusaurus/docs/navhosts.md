@@ -30,20 +30,16 @@ However, you can override some defaults:
 
 - `navGraph: NavGraphSpec` - By default `NavGraphs.root`, but it can change depending on your [navigation graphs setup](defining-navgraphs). Only destinations that belong to this navigation graph or its nested navigation graphs can be navigated to using the `NavController` connected to this navigation host.
 
-- `modifier: Modifier` - modifier applied to this Composable. It affects the screen Composable.
-
-<Tabs>
-  <TabItem value="2.0" label="<= 2.0" default>
-
-- `startRoute: Route`: used to override the start route set in the `NavGraph` "start = true" in annotations, at runtime. If you have some condition upon which you want to start on some other screen, then pass it explicitly with this parameter. `Route` is an interface only implemented by `Destination` and `NavGraph`, since both are valid to start at (if you pass a `NavGraph` then that `NavGraph`'s start destination will be the first shown).
-  
-  </TabItem>
-  <TabItem value="2.1" label=">= 2.1">
-
 - `start: Direction`: used to override the start route set in the `NavGraph` "start = true" in annotations, at runtime. If you have some condition upon which you want to start on some other screen, then pass it explicitly with this parameter. `Direction` is what you get when you invoke a generated `Destination` or `NavGraph` and pass it's arguments, or if they don't have arguments, they will be generated as `Direction`s.
 
-  </TabItem>
-</Tabs>
+<details>
+  <summary>If on 2.0.x `startRoute` instead of `start`</summary>
+
+- `startRoute: Route`: used to override the start route set in the `NavGraph` "start = true" in annotations, at runtime. If you have some condition upon which you want to start on some other screen, then pass it explicitly with this parameter. `Route` is an interface only implemented by `Destination` and `NavGraph`, since both are valid to start at (if you pass a `NavGraph` then that `NavGraph`'s start destination will be the first shown).
+
+</details>
+
+- `modifier: Modifier` - modifier applied to this Composable. It affects the screen Composable.
 
 - `engine: NavHostEngine` - this is the engine that will do all the composable registering in the NavHost. The only reason to override the default here is when you're using `animations-core`, i.e, when you want to animate between screens or have Bottom Sheet destinations. If that is your case, then call `rememberAnimatedNavHostEngine` and pass the result here. Read more [here](styles-and-animations)
 
