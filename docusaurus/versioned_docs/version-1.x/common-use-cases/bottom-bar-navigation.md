@@ -34,7 +34,9 @@ Taking the example from above, that could look something like:
 ```kotlin
 @Composable
 fun BottomBar(
-    navController: NavController
+    // you can get one `DestinationsNavigator` by calling `navController.toDestinationsNavigator()
+    // or navController.rememberDestinationsNavigator() when in a Composable function`
+    destinationsNavigator: DestinationsNavigator
 ) {
     val currentDestination: Destination? = navController.appCurrentDestinationAsState().value
         ?: NavGraphs.root.startAppDestination
@@ -44,7 +46,7 @@ fun BottomBar(
             BottomNavigationItem(
                 selected = currentDestination == destination.direction,
                 onClick = {
-                    navController.navigateTo(destination.direction) {
+                    destinationsNavigator.navigate(destination.direction) {
                         launchSingleTop = true
                     }
                 },
