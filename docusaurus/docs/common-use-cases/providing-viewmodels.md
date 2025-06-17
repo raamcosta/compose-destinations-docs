@@ -113,6 +113,7 @@ Here is what that looks like:
 fun AppNavigation(
     activity: ComponentActivity
 ) {
+    val destinationsNavigator = navController.rememberDestinationsNavigator()
     DestinationsNavHost(
         //...
         dependenciesContainerBuilder = { //this: DependenciesContainerBuilder<*>
@@ -121,7 +122,7 @@ fun AppNavigation(
             // making it available to all screens that belong to it
             navGraph(NavGraphs.settings) {
                 val parentEntry = remember(navBackStackEntry) {
-                    navController.getBackStackEntry(NavGraphs.settings)
+                    destinationsNavigator.getBackStackEntry(NavGraphs.settings)
                 }
                 dependency(hiltViewModel<SettingsViewModel>(parentEntry))
             }
